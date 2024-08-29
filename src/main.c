@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 14:53:20 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:55:47 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	error_msg(char *str)
 	printf("%s\n", str);
 	return (1);
 }
-
-int	run_mlx()
 
 int	input_chk(int argc, char *argv[])
 {
@@ -57,7 +55,6 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_ESCAPE)
 		{
 			mlx_close_window(data->mlx_ptr);
-			ft_printf("you gave up :(\n");
 		}
 	}
 }
