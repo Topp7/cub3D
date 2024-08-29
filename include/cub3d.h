@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 14:32:51 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:47:48 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,21 @@
 
 /* -------------------------------- LIBRARIES ------------------------------- */
 
-# include "../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
-# include <limits.h>
-# include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
+# include <unistd.h>
+# include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
-# include <stdint.h>
 # include <math.h>
 # include "../lib/libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+
+/* ------------------------------ WINDOW SIZE ------------------------------- */
+
+# define WIDTH 256
+# define HEIGHT 256
 
 /* -------------------------------- STRUCTS --------------------------------- */
 
