@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
+#    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/08/29 14:31:10 by chorst           ###   ########.fr        #
+#    Updated: 2024/08/29 14:50:22 by stopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NC := \033[0m
 # Flags
 CFLAGS  := -Wall -Werror -Wextra -I.
 
-LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS := ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 # Directories
 LIBFT := lib/libft
@@ -38,6 +38,10 @@ HEADER  := include/cub3d.h lib/libft/libft.h
 
 MESSAGE := "\n$(GREEN)$(NAME) built successfully!$(NC)\n"
 
+# Project build rule
+all: libmlx $(OBJ_DIR) $(NAME) $(HEADER)
+	@echo $(MESSAGE)
+
 # Build the MLX42 library (if needed)
 libmlx:
 	@if [ ! -d "MLX42" ]; then \
@@ -46,11 +50,6 @@ libmlx:
 		echo "Directory MLX42 already exists."; \
 	fi
 		@cd MLX42 && cmake -B build && cmake --build build -j4 \
-
-
-# Project build rule
-all: $(OBJ_DIR) $(NAME) $(HEADER)
-	@echo $(MESSAGE)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFT)
