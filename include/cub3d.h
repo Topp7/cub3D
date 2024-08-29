@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 17:35:49 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/29 17:52:24 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 
 typedef struct s_data
 {
+	char	*file;
 	char	**map;
 	mlx_t	*mlx_ptr;
 }	t_data;
