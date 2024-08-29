@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/28 18:57:35 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/29 14:24:00 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int	main(int argc, char *argv[])
 {
 	if (input_chk(argc, argv) == 1)
 		return (1);
+	
 	printf("Hello, World!\n");
 }
