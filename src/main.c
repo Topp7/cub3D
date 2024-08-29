@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 14:24:00 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/29 14:47:43 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,44 @@ int	input_chk(int argc, char *argv[])
 	return (0);
 }
 
+t_data	*save_input(char **argv)
+{
+	t_data	*data;
+
+	(void)argv;
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
+	data->mlx_ptr = mlx_init(400, 400, "Test", true);
+	if (!data->mlx_ptr)
+		return (NULL);
+	return (data);
+}
+
+void	control_keyhook(mlx_key_data_t keydata, void *param)
+{
+	t_data	*data;
+
+	data = param;
+	if (keydata.action == MLX_RELEASE)
+	{
+		if (keydata.key == MLX_KEY_ESCAPE)
+		{
+			mlx_close_window(data->mlx_ptr);
+			ft_printf("you gave up :(\n");
+		}
+	}
+}
+
 int	main(int argc, char *argv[])
 {
+	t_data	*data;
+
 	if (input_chk(argc, argv) == 1)
 		return (1);
-	
+	data = save_input(argv);
+	mlx_key_hook(data->mlx_ptr, control_keyhook, data);
+	mlx_loop(data->mlx_ptr);
+	mlx_terminate(data->mlx_ptr);
 	printf("Hello, World!\n");
 }
