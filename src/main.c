@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 17:51:00 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/29 17:58:38 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_ESCAPE)
 		{
 			mlx_close_window(data->mlx_ptr);
-			ft_printf("you gave up :(\n");
 		}
 	}
 }
