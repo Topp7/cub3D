@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
+#    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/08/28 19:04:37 by stopp            ###   ########.fr        #
+#    Updated: 2024/08/29 14:31:10 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ NC := \033[0m
 # Flags
 CFLAGS  := -Wall -Werror -Wextra -I.
 
+LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+
 # Directories
 LIBFT := lib/libft
 SRC_DIR := src
@@ -36,6 +38,16 @@ HEADER  := include/cub3d.h lib/libft/libft.h
 
 MESSAGE := "\n$(GREEN)$(NAME) built successfully!$(NC)\n"
 
+# Build the MLX42 library (if needed)
+libmlx:
+	@if [ ! -d "MLX42" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git MLX42; \
+	else \
+		echo "Directory MLX42 already exists."; \
+	fi
+		@cd MLX42 && cmake -B build && cmake --build build -j4 \
+
+
 # Project build rule
 all: $(OBJ_DIR) $(NAME) $(HEADER)
 	@echo $(MESSAGE)
@@ -43,7 +55,7 @@ all: $(OBJ_DIR) $(NAME) $(HEADER)
 $(NAME): $(OBJS)
 	@make -C $(LIBFT)
 	@echo "$(BLUE)libft built successfully!$(NC)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)/libft.a -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(LIBFT)/libft.a -o $@
 
 # Rule to compile source files into object files in a separate obj folder
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(HEADER)
@@ -62,6 +74,7 @@ clean:
 
 # Rule to clean project and object files
 fclean:
+	@rm -rf MLX42
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(NAME)
 	make -C $(LIBFT) fclean
