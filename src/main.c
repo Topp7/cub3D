@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 14:47:43 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/29 15:40:09 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,23 @@ int	input_chk(int argc, char *argv[])
 	return (0);
 }
 
-t_data	*save_input(char **argv)
+void	save_map(t_data *data)
 {
-	t_data	*data;
+	(void)data;
+}
 
-	(void)argv;
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
+int	save_input(t_data *data)
+{
+	int		fd;
+
+	fd = open(data->file, O_RDONLY);
+	if (fd <= 0)
+		return (0);
+	save_map(data);
 	data->mlx_ptr = mlx_init(400, 400, "Test", true);
 	if (!data->mlx_ptr)
-		return (NULL);
-	return (data);
+		return (0);
+	return (1);
 }
 
 void	control_keyhook(mlx_key_data_t keydata, void *param)
@@ -66,7 +71,11 @@ int	main(int argc, char *argv[])
 
 	if (input_chk(argc, argv) == 1)
 		return (1);
-	data = save_input(argv);
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (1);
+	data->file = argv[1];
+	save_input(data);
 	mlx_key_hook(data->mlx_ptr, control_keyhook, data);
 	mlx_loop(data->mlx_ptr);
 	mlx_terminate(data->mlx_ptr);

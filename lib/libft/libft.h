@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:46:36 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/28 18:34:33 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/29 15:31:41 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdbool.h>
+# include <limits.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "get_next_line.h"
 
 typedef struct s_list

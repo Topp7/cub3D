@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 14:38:21 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/29 15:30:36 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@
 /* -------------------------------- LIBRARIES ------------------------------- */
 
 # include "../MLX42/include/MLX42/MLX42.h"
-# include <stdio.h>
-# include <limits.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
 # include <stdint.h>
@@ -37,6 +33,7 @@
 
 typedef struct s_data
 {
+	char	*file;
 	char	**map;
 	mlx_t	*mlx_ptr;
 }	t_data;
