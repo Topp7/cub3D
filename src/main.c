@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 15:49:54 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/30 18:01:38 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 		return (1);
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (1);
+		return (error_msg("Malloc failed"));
 	if (parse_cub_file(argv[1], data) == 1)
 		return (1);
 	if (data->cub_cont == NULL)
@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 		return (error_msg("No map found"));
 	print2d_array(data->map);
 	extract_paths(data);
+	extract_rgb(data);
 	raycast_exe(data);
 	free(data->cub_cont);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/08/30 15:49:26 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/30 17:59:19 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,38 +86,39 @@ void	extract_paths(t_data *data)
 	extract_direction_str(data);
 	data->temp = remove_chars(data->north, "NO \n");
 	free(data->north);
-	data->north = ft_strdup(data->temp);
+	data->north = ft_strdup(data->temp + 2);
 	free(data->temp);
-	data->temp = remove_chars(data->south, "SO \n");
+	data->temp = remove_chars(data->south, " \n");
 	free(data->south);
-	data->south = ft_strdup(data->temp);
+	data->south = ft_strdup(data->temp + 2);
 	free(data->temp);
-	data->temp = remove_chars(data->west, "WE \n");
+	data->temp = remove_chars(data->west, " \n");
 	free(data->west);
-	data->west = ft_strdup(data->temp);
+	data->west = ft_strdup(data->temp + 2);
 	free(data->temp);
 	data->temp = remove_chars(data->east, "EA ");
 	free(data->east);
-	data->east = ft_strdup(data->temp);
+	data->east = ft_strdup(data->temp + 2);
 	free(data->temp);
-	data->temp = remove_chars(data->ceiling, "C \n");
-	free(data->ceiling);
-	data->ceiling = ft_strdup(data->temp);
-	free(data->temp);
-	data->temp = remove_chars(data->floor, "F ");
-	free(data->floor);
-	data->floor = ft_strdup(data->temp);
-	free(data->temp);
-	printf("\nDirecitons:\n");
-	printf("North: %s\n", data->north);
-	printf("South: %s\n", data->south);
-	printf("West: %s\n", data->west);
-	printf("East: %s\n", data->east);
-	printf("Ceiling: %s\n", data->ceiling);
-	printf("Floor: %s\n", data->floor);
+	printf("\n");
+	printf("%s\n", data->north);
+	printf("%s\n", data->south);
+	printf("%s\n", data->west);
+	printf("%s\n", data->east);
 }
 
-// void	extract_rgb(t_data *data)
-// {
-
-// }
+void	extract_rgb(t_data *data)
+{
+	data->temp = NULL;
+	data->temp = remove_chars(data->ceiling, " \n");
+	free(data->ceiling);
+	data->ceiling = ft_strdup(data->temp + 1);
+	free(data->temp);
+	data->temp = remove_chars(data->floor, " \n");
+	free(data->floor);
+	data->floor = ft_strdup(data->temp + 1);
+	free(data->temp);
+	printf("\n");
+	printf("%s\n", data->ceiling);
+	printf("%s\n", data->floor);
+}

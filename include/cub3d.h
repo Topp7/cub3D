@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 17:22:59 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/30 17:58:42 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ bool	find_first_map_line(char *str);
 char	**extract_map(t_data *data);
 void	extract_direction_str(t_data *data);
 void	extract_paths(t_data *data);
+void	extract_rgb(t_data *data);
 
 //	main.c
 
