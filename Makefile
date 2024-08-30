@@ -6,7 +6,7 @@
 #    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/08/29 17:23:49 by chorst           ###   ########.fr        #
+#    Updated: 2024/08/30 13:58:10 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,13 @@ LIBFT := lib/libft
 SRC_DIR := src
 OBJ_DIR := obj
 # Source files
-SRCS    :=	src/main.c \
-			src/parse_cub_content.c \
-			src/parse_cub_file.c \
-			gnl/get_next_line.c \
-			gnl/get_next_line_utils.c
+SRCS    :=	gnl/get_next_line.c \
+			gnl/get_next_line_utils.c \
+			src/main.c \
+			src/parser/parse_cub_content.c \
+			src/parser/parse_cub_file.c \
+			src/helper_functions/helper1.c \
+			src/helper_functions/helper2.c \
 
 # Object files
 OBJS    := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

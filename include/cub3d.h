@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 17:52:24 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/30 14:16:11 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,28 @@
 
 /* -------------------------------- STRUCTS --------------------------------- */
 
-typedef struct s_data
-{
-	char	*file;
-	char	**map;
-	mlx_t	*mlx_ptr;
-}	t_data;
-
 typedef struct s_pos
 {
-	float	x; // von oben nach unten
+	float	x;
 	float	y;
 }	t_pos;
 
-
-typedef struct s_cub
+typedef struct s_data
 {
-	char			**cub_content;
-	char			**map;
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
-	char			*ceiling;
-	char			*floor;
-	char			player_direction;
-	t_pos			player_pos;
-}					t_cub;
+	char	*temp;
+	char	*file;
+	char	**cub_cont;
+	char	**map;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*ceiling;
+	char	*floor;
+	char	player_direction;
+	t_pos	player_pos;
+	mlx_t	*mlx_ptr;
+}	t_data;
 
 /* ------------------------------- FUNCTIONS -------------------------------- */
 
@@ -81,6 +76,29 @@ char	*get_next_line(int fd);
 int		str_alloc_len(char *str);
 void	str_after_n(char *str);
 void	*ft_realloc(void *ptr, size_t new_size, int i);
+
+/* ################################  HELPER  ################################ */
+
+// helper1.c
+void	print2d_array(char **array);
+
+// helper2.c
+int		count_relevant_chars(const char *str, const char *chrs_to_rmv);
+void	remove_helper(const char *str, const char *chrs_to_rmv, char *new_s);
+char	*remove_chars(const char *s, const char *chrs_to_rmv);
+
+/* ################################  PARSER  ################################ */
+
+// parse_cub_file.c
+int		file_line_count(int fd);
+int		parse_cub_file(char *cub_file, t_data *data);
+
+// parse_cub_content.c
+bool	find_first_map_line(char *str);
+char	**extract_map(t_data data);
+void	extract_direction_str(t_data *data);
+void	extract_paths(t_data *data);
+
 
 //	main.c
 

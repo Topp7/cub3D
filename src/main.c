@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 17:52:41 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/30 14:19:53 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,42 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-int	main(int argc, char *argv[])
-{
-	t_data	*data;
+// int	main(int argc, char *argv[])
+// {
+// 	t_data	*data;
 
-	if (input_chk(argc, argv) == 1)
+// 	if (input_chk(argc, argv) == 1)
+// 		return (1);
+// 	data = malloc(sizeof(t_data));
+// 	if (!data)
+// 		return (1);
+// 	data->file = argv[1];
+// 	save_input(data);
+// 	mlx_key_hook(data->mlx_ptr, control_keyhook, data);
+// 	mlx_loop(data->mlx_ptr);
+// 	mlx_terminate(data->mlx_ptr);
+// 	printf("Hello, World!\n");
+// }
+
+int main(int argc, char **argv)
+{
+	t_data	data;
+	char	**map;
+
+	if (argc != 2)
+		return (error_msg("Wrong amount of arguments"));
+	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
+		return (error_msg("Wrong filetype"));
+	if (parse_cub_file(argv[1], &data) == 1)
 		return (1);
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	data->file = argv[1];
-	save_input(data);
-	mlx_key_hook(data->mlx_ptr, control_keyhook, data);
-	mlx_loop(data->mlx_ptr);
-	mlx_terminate(data->mlx_ptr);
-	printf("Hello, World!\n");
+	if (data.cub_cont == NULL)
+		return (error_msg("No file found"));
+	map = extract_map(data);
+	if (map == NULL)
+		return (error_msg("No map found"));
+	print2d_array(map);
+	extract_paths(&data);
+	free(data.cub_cont);
+	free(map);
+	return (0);
 }
