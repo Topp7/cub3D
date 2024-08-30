@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/08/30 14:30:34 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:37:24 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	find_first_map_line(char *str)
 }
 
 // Function that extracts the map from the cub_content
-char	**extract_map(t_data data)
+char	**extract_map(t_data *data)
 {
 	int		i;
 	int		j;
@@ -40,16 +40,16 @@ char	**extract_map(t_data data)
 
 	i = 0;
 	j = 0;
-	while (find_first_map_line(data.cub_cont[i]) == false && data.cub_cont[i])
+	while (find_first_map_line(data->cub_cont[i]) == false && data->cub_cont[i])
 		i++;
-	if (!data.cub_cont[i] || !data.cub_cont[i + 1])
+	if (!data->cub_cont[i] || !data->cub_cont[i + 1])
 		return (NULL);
-	map = malloc(sizeof(char *) * (ft_strlen(*data.cub_cont) - i + 1));
+	map = malloc(sizeof(char *) * (ft_strlen(*data->cub_cont) - i + 1));
 	if (!map)
 		return (NULL);
-	while (data.cub_cont[i])
+	while (data->cub_cont[i])
 	{
-		map[j] = ft_strdup(data.cub_cont[i]);
+		map[j] = ft_strdup(data->cub_cont[i]);
 		i++;
 		j++;
 	}
@@ -90,40 +90,39 @@ void	extract_paths(t_data *data)
 	extract_direction_str(data);
 	data->temp = remove_chars(data->north, " \n");
 	free(data->north);
-	data->north = ft_strdup(data->temp);
+	data->north = ft_strdup(data->temp + 2);
 	free(data->temp);
-	data->temp = remove_chars(data->south, "SO \n");
+	data->temp = remove_chars(data->south, " \n");
 	free(data->south);
-	data->south = ft_strdup(data->temp);
+	data->south = ft_strdup(data->temp + 2);
 	free(data->temp);
-	data->temp = remove_chars(data->west, "WE \n");
+	data->temp = remove_chars(data->west, " \n");
 	free(data->west);
-	data->west = ft_strdup(data->temp);
+	data->west = ft_strdup(data->temp + 2);
 	free(data->temp);
-	data->temp = remove_chars(data->east, "EA \n");
+	data->temp = remove_chars(data->east, " \n");
 	free(data->east);
-	data->east = ft_strdup(data->temp);
+	data->east = ft_strdup(data->temp + 2);
 	free(data->temp);
-	data->temp = remove_chars(data->ceiling, "C ");
-	free(data->ceiling);
-	data->ceiling = ft_strdup(data->temp);
-	free(data->temp);
-	data->temp = remove_chars(data->floor, "F ");
-	free(data->floor);
-	data->floor = ft_strdup(data->temp);
-	free(data->temp);
-	printf("\nDirecitons:\n");
-	printf("North: %s\n", data->north);
-	printf("South: %s\n", data->south);
-	printf("West: %s\n", data->west);
-	printf("East: %s\n", data->east);
-	printf("Ceiling: %s\n", data->ceiling);
-	printf("Floor: %s\n", data->floor);
+	printf("\n");
+	printf("%s\n", data->north);
+	printf("%s\n", data->south);
+	printf("%s\n", data->west);
+	printf("%s\n", data->east);
 }
 
-// void	extract_rgb(t_data *data)
-// {
-
-// }
-
-
+void	extract_rgb(t_data *data)
+{
+	data->temp = NULL;
+	data->temp = remove_chars(data->ceiling, " \n");
+	free(data->ceiling);
+	data->ceiling = ft_strdup(data->temp + 1);
+	free(data->temp);
+	data->temp = remove_chars(data->floor, " \n");
+	free(data->floor);
+	data->floor = ft_strdup(data->temp + 1);
+	free(data->temp);
+	printf("\n");
+	printf("%s\n", data->ceiling);
+	printf("%s\n", data->floor);
+}

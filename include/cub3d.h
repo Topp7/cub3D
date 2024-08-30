@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 14:16:11 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:34:44 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ int		parse_cub_file(char *cub_file, t_data *data);
 
 // parse_cub_content.c
 bool	find_first_map_line(char *str);
-char	**extract_map(t_data data);
+char	**extract_map(t_data *data);
 void	extract_direction_str(t_data *data);
 void	extract_paths(t_data *data);
+void	extract_rgb(t_data *data);
+
 
 
 //	main.c

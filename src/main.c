@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 14:35:11 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:36:38 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,23 +83,27 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 
 int main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
 	char	**map;
 
+	data = malloc(sizeof(t_data));
+	if (data == NULL)
+		return (error_msg("Malloc failed"));
 	if (argc != 2)
 		return (error_msg("Wrong amount of arguments"));
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
 		return (error_msg("Wrong filetype"));
-	if (parse_cub_file(argv[1], &data) == 1)
+	if (parse_cub_file(argv[1], data) == 1)
 		return (1);
-	if (data.cub_cont == NULL)
+	if (data->cub_cont == NULL)
 		return (error_msg("No file found"));
 	map = extract_map(data);
 	if (map == NULL)
 		return (error_msg("No map found"));
 	print2d_array(map);
-	extract_paths(&data);
-	free(data.cub_cont);
+	extract_paths(data);
+	extract_rgb(data);
+	free(data->cub_cont);
 	free(map);
 	return (0);
 }
