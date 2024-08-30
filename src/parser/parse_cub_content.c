@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/08/30 14:30:34 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:49:26 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	find_first_map_line(char *str)
 }
 
 // Function that extracts the map from the cub_content
-char	**extract_map(t_data data)
+char	**extract_map(t_data *data)
 {
 	int		i;
 	int		j;
@@ -40,19 +40,15 @@ char	**extract_map(t_data data)
 
 	i = 0;
 	j = 0;
-	while (find_first_map_line(data.cub_cont[i]) == false && data.cub_cont[i])
+	while (find_first_map_line(data->cub_cont[i]) == false && data->cub_cont[i])
 		i++;
-	if (!data.cub_cont[i] || !data.cub_cont[i + 1])
+	if (!data->cub_cont[i] || !data->cub_cont[i + 1])
 		return (NULL);
-	map = malloc(sizeof(char *) * (ft_strlen(*data.cub_cont) - i + 1));
+	map = malloc(sizeof(char *) * (ft_strlen(*data->cub_cont) - i + 1));
 	if (!map)
 		return (NULL);
-	while (data.cub_cont[i])
-	{
-		map[j] = ft_strdup(data.cub_cont[i]);
-		i++;
-		j++;
-	}
+	while (data->cub_cont[i])
+		map[j++] = ft_strdup(data->cub_cont[i++]);
 	map[j] = NULL;
 	return (map);
 }
@@ -88,7 +84,7 @@ void	extract_paths(t_data *data)
 {
 	data->temp = NULL;
 	extract_direction_str(data);
-	data->temp = remove_chars(data->north, " \n");
+	data->temp = remove_chars(data->north, "NO \n");
 	free(data->north);
 	data->north = ft_strdup(data->temp);
 	free(data->temp);
@@ -100,11 +96,11 @@ void	extract_paths(t_data *data)
 	free(data->west);
 	data->west = ft_strdup(data->temp);
 	free(data->temp);
-	data->temp = remove_chars(data->east, "EA \n");
+	data->temp = remove_chars(data->east, "EA ");
 	free(data->east);
 	data->east = ft_strdup(data->temp);
 	free(data->temp);
-	data->temp = remove_chars(data->ceiling, "C ");
+	data->temp = remove_chars(data->ceiling, "C \n");
 	free(data->ceiling);
 	data->ceiling = ft_strdup(data->temp);
 	free(data->temp);
@@ -125,5 +121,3 @@ void	extract_paths(t_data *data)
 // {
 
 // }
-
-

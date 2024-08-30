@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 14:52:09 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/30 15:49:54 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,56 +50,25 @@ int	save_input(t_data *data)
 	return (1);
 }
 
-void	control_keyhook(mlx_key_data_t keydata, void *param)
+int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	data = param;
-	if (keydata.action == MLX_RELEASE)
-	{
-		if (keydata.key == MLX_KEY_ESCAPE)
-		{
-			mlx_close_window(data->mlx_ptr);
-		}
-	}
-}
-
-// int	main(int argc, char *argv[])
-// {
-// 	t_data	*data;
-
-// 	if (input_chk(argc, argv) == 1)
-// 		return (1);
-// 	data = malloc(sizeof(t_data));
-// 	if (!data)
-// 		return (1);
-// 	data->file = argv[1];
-// 	save_input(data);
-// 	mlx_key_hook(data->mlx_ptr, control_keyhook, data);
-// 	mlx_loop(data->mlx_ptr);
-// 	mlx_terminate(data->mlx_ptr);
-// 	printf("Hello, World!\n");
-// }
-
-int main(int argc, char **argv)
-{
-	t_data	data;
-	char	**map;
-
-	if (argc != 2)
-		return (error_msg("Wrong amount of arguments"));
-	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
-		return (error_msg("Wrong filetype"));
-	if (parse_cub_file(argv[1], &data) == 1)
+	if (input_chk(argc, argv) == 1)
 		return (1);
-	if (data.cub_cont == NULL)
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (1);
+	if (parse_cub_file(argv[1], data) == 1)
+		return (1);
+	if (data->cub_cont == NULL)
 		return (error_msg("No file found"));
-	map = extract_map(data);
-	if (map == NULL)
+	data->map = extract_map(data);
+	if (data->map == NULL)
 		return (error_msg("No map found"));
-	print2d_array(map);
-	extract_paths(&data);
-	free(data.cub_cont);
-	free(map);
+	print2d_array(data->map);
+	extract_paths(data);
+	raycast_exe(data);
+	free(data->cub_cont);
 	return (0);
 }

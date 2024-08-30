@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
+#    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/08/30 13:58:10 by chorst           ###   ########.fr        #
+#    Updated: 2024/08/30 16:33:42 by stopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRCS    :=	gnl/get_next_line.c \
 			src/parser/parse_cub_file.c \
 			src/helper_functions/helper1.c \
 			src/helper_functions/helper2.c \
+			src/raycasting/raycasting.c \
+			src/raycasting/test_functions.c \
 
 # Object files
 OBJS    := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

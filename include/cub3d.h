@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 14:51:34 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/30 17:22:59 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,30 @@ typedef struct s_pos
 
 typedef struct s_data
 {
-	char	*temp;
-	char	*file;
-	char	**cub_cont;
-	char	**map;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*ceiling;
-	char	*floor;
-	char	player_direction;
-	t_pos	player_pos;
-	mlx_t	*mlx_ptr;
+	char		*temp;
+	char		*file;
+	char		**cub_cont;
+	char		**map;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	char		*ceiling;
+	char		*floor;
+	char		player_direction;
+	t_pos		*player_pos;
+	mlx_t		*mlx_ptr;
+	mlx_image_t	*img;
+	mlx_image_t	*pl_img;
 }	t_data;
 
 /* ------------------------------- FUNCTIONS -------------------------------- */
 
 //	src/raycasting.c
-void	test_values(t_data *data);
+void	raycast_exe(t_data *data);
+
+//	src/test_functions.c
+void	add_testdata(t_data *data);
 
 //	main.c
 
@@ -100,7 +105,7 @@ int		parse_cub_file(char *cub_file, t_data *data);
 
 // parse_cub_content.c
 bool	find_first_map_line(char *str);
-char	**extract_map(t_data data);
+char	**extract_map(t_data *data);
 void	extract_direction_str(t_data *data);
 void	extract_paths(t_data *data);
 
