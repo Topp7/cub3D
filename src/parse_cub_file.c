@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_cub_file.c                                    :+:      :+:    :+:   */
+/*   parse_cub_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:35:42 by chorst            #+#    #+#             */
-/*   Updated: 2024/08/29 17:19:14 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/29 18:16:57 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**file_read(char *cub_file, char **cub_content)
 	return (cub_content);
 }
 
-int	parse_cub_file(char *cub_file, t_cub *cub)
+int	parse_cub_file(char *cub_file, t_data *data)
 {
 	char	**cub_content;
 
@@ -63,6 +63,6 @@ int	parse_cub_file(char *cub_file, t_cub *cub)
 	cub_content = file_read(cub_file, cub_content);
 	if (cub_content == NULL)
 		return (1);
-	cub->cub_content = cub_content;
+	data->cub_content = cub_content;
 	return (0);
 }

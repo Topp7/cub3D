@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 17:52:24 by chorst           ###   ########.fr       */
+/*   Updated: 2024/08/29 18:32:30 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,47 +41,44 @@
 
 /* -------------------------------- STRUCTS --------------------------------- */
 
+typedef struct s_pos
+{
+	float	px; // von oben nach unten
+	float	py;
+}	t_pos;
+
 typedef struct s_data
 {
 	char	*file;
+	char	**cub_content;
 	char	**map;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*ceiling;
+	char	*floor;
+	char	player_direction;
+	t_pos	player_pos;
 	mlx_t	*mlx_ptr;
 }	t_data;
 
-typedef struct s_pos
-{
-	float	x; // von oben nach unten
-	float	y;
-}	t_pos;
-
-
-typedef struct s_cub
-{
-	char			**cub_content;
-	char			**map;
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
-	char			*ceiling;
-	char			*floor;
-	char			player_direction;
-	t_pos			player_pos;
-}					t_cub;
-
 /* ------------------------------- FUNCTIONS -------------------------------- */
+
+//	src/raycasting.c
+void	test_values(t_data *data);
+
+//	main.c
 
 /* ################################  GNL  ################################### */
 
-// get_next_line.c
+//	get_next_line.c
 char	*read_better(int fd, char **str, char *newline, int n);
 char	*get_next_line(int fd);
 
-// get_next_line_utils.c
+//	get_next_line_utils.c
 int		str_alloc_len(char *str);
 void	str_after_n(char *str);
 void	*ft_realloc(void *ptr, size_t new_size, int i);
-
-//	main.c
 
 #endif

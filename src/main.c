@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/29 17:58:38 by stopp            ###   ########.fr       */
+/*   Updated: 2024/08/29 18:40:34 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	save_input(t_data *data)
 	if (fd <= 0)
 		return (0);
 	save_map(data);
-	data->mlx_ptr = mlx_init(400, 400, "Test", true);
+	data->mlx_ptr = mlx_init(2000, 1000, "Test", true);
 	if (!data->mlx_ptr)
 		return (0);
 	return (1);
