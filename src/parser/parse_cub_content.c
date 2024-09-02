@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/08/30 17:59:19 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/02 17:35:59 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// Function that searches for the first line of a map
+// Function that searches for the first line pattern of the map
 bool	find_first_map_line(char *str)
 {
 	int		i;
@@ -31,7 +31,7 @@ bool	find_first_map_line(char *str)
 	return (false);
 }
 
-// Function that extracts the map from the cub_content
+// Function that extracts the map from char **cub_content
 char	**extract_map(t_data *data)
 {
 	int		i;
@@ -48,12 +48,13 @@ char	**extract_map(t_data *data)
 	if (!map)
 		return (NULL);
 	while (data->cub_cont[i])
-		map[j++] = ft_strdup(data->cub_cont[i++]);
+		map[j++] = remove_chars(data->cub_cont[i++], "\n");
 	map[j] = NULL;
 	return (map);
 }
 
-void	extract_direction_str(t_data *data)
+// Function that extracts the paths and rgb values from char **cub_content
+void	extract_paths_and_rgbs(t_data *data)
 {
 	int		i;
 	int		j;
@@ -65,60 +66,61 @@ void	extract_direction_str(t_data *data)
 		while (data->cub_cont[i][j] == ' ')
 			j++;
 		if (data->cub_cont[i][j] == 'N' && data->cub_cont[i][j + 1] == 'O')
-			data->north = ft_strdup(data->cub_cont[i]);
-		if (data->cub_cont[i][j] == 'S' && data->cub_cont[i][j + 1] == 'O')
-			data->south = ft_strdup(data->cub_cont[i]);
-		if (data->cub_cont[i][j] == 'W' && data->cub_cont[i][j + 1] == 'E')
-			data->west = ft_strdup(data->cub_cont[i]);
-		if (data->cub_cont[i][j] == 'E' && data->cub_cont[i][j + 1] == 'A')
-			data->east = ft_strdup(data->cub_cont[i]);
-		if (data->cub_cont[i][j] == 'C' && data->cub_cont[i][j + 1] == ' ')
-			data->ceiling = ft_strdup(data->cub_cont[i]);
-		if (data->cub_cont[i][j] == 'F' && data->cub_cont[i][j + 1] == ' ')
-			data->floor = ft_strdup(data->cub_cont[i]);
+			data->north = remove_chars(&data->cub_cont[i][2 + j], " \n");
+		else if (data->cub_cont[i][j] == 'S' && data->cub_cont[i][j + 1] == 'O')
+			data->south = remove_chars(&data->cub_cont[i][2 + j], " \n");
+		else if (data->cub_cont[i][j] == 'W' && data->cub_cont[i][j + 1] == 'E')
+			data->west = remove_chars(&data->cub_cont[i][2 + j], " \n");
+		else if (data->cub_cont[i][j] == 'E' && data->cub_cont[i][j + 1] == 'A')
+			data->east = remove_chars(&data->cub_cont[i][2 + j], " \n");
+		else if (data->cub_cont[i][j] == 'C' && data->cub_cont[i][j + 1] == ' ')
+			data->ceiling = remove_chars(&data->cub_cont[i][1 + j], " \n");
+		else if (data->cub_cont[i][j] == 'F' && data->cub_cont[i][j + 1] == ' ')
+			data->floor = remove_chars(&data->cub_cont[i][1 + j], " \n");
 		i++;
 	}
 }
 
-void	extract_paths(t_data *data)
+// Function that extracts the player position and direction from the map
+void	extract_player_data(t_data *data)
 {
-	data->temp = NULL;
-	extract_direction_str(data);
-	data->temp = remove_chars(data->north, "NO \n");
-	free(data->north);
-	data->north = ft_strdup(data->temp + 2);
-	free(data->temp);
-	data->temp = remove_chars(data->south, " \n");
-	free(data->south);
-	data->south = ft_strdup(data->temp + 2);
-	free(data->temp);
-	data->temp = remove_chars(data->west, " \n");
-	free(data->west);
-	data->west = ft_strdup(data->temp + 2);
-	free(data->temp);
-	data->temp = remove_chars(data->east, "EA ");
-	free(data->east);
-	data->east = ft_strdup(data->temp + 2);
-	free(data->temp);
-	printf("\n");
-	printf("%s\n", data->north);
-	printf("%s\n", data->south);
-	printf("%s\n", data->west);
-	printf("%s\n", data->east);
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	data->player_pos = malloc(sizeof(t_pos)); // remove after initialization
+	while (data->map[x])
+	{
+		y = 0;
+		while (data->map[x][y])
+		{
+			if (data->map[x][y] == 'N'
+				|| data->map[x][y] == 'E'
+				|| data->map[x][y] == 'S'
+				|| data->map[x][y] == 'W')
+			{
+				data->player_pos->px = x;
+				data->player_pos->py = y;
+				data->player_direction = data->map[x][y];
+				return ;
+			}
+			y++;
+		}
+		x++;
+	}
 }
 
-void	extract_rgb(t_data *data)
+// Main extraction function that calls all the other extraction functions
+int	extract_cub_data(t_data *data)
 {
-	data->temp = NULL;
-	data->temp = remove_chars(data->ceiling, " \n");
-	free(data->ceiling);
-	data->ceiling = ft_strdup(data->temp + 1);
-	free(data->temp);
-	data->temp = remove_chars(data->floor, " \n");
-	free(data->floor);
-	data->floor = ft_strdup(data->temp + 1);
-	free(data->temp);
-	printf("\n");
-	printf("%s\n", data->ceiling);
-	printf("%s\n", data->floor);
+	data->map = extract_map(data);
+	if (data->map == NULL)
+		return (printf("Map extraction failed"));
+	extract_paths_and_rgbs(data);
+	if (data->north == NULL || data->south == NULL || data->west == NULL
+		|| data->east == NULL || data->ceiling == NULL || data->floor == NULL)
+		return (printf("Path or RGB extraction failed"));
+	extract_player_data(data);
+	return (0);
 }
