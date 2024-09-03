@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 08:55:36 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 10:58:55 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 		return (error_msg("Malloc failed"));
 	if (parse_cub_file(argv[1], data) == 1 || extract_cub_data(data) == 1)
 		return (1);
-	print_values(data);
+	// print_values(data);
 	// raycast_exe(data);
 	free(data->cub_cont);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 10:46:57 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 10:57:17 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ void	*ft_realloc(void *ptr, size_t new_size, int i);
 // ---------------------------- Project Files ----------------------------------
 // #############################################################################
 
+/* ---------------------------  ERROR HANDLER  ---------------------------- */
+
+//	project_files/error_handling/error_handler1.c
+void	error_handler1(int error_code, t_data *data);
+
 /* -------------------------------  HELPERS  -------------------------------- */
 
 // project_files/helper/helper1.c
@@ -99,6 +104,11 @@ int		int_into_hex(int *rgb);
 int		count_relevant_chars(const char *str, const char *chrs_to_rmv);
 void	remove_helper(const char *str, const char *chrs_to_rmv, char *new_s);
 char	*remove_chars(const char *s, const char *chrs_to_rmv);
+
+/* ---------------------------  INITIALIZATION  ---------------------------- */
+
+//	project_files/initialization/init_data.c
+void	init_data(t_data *data);
 
 /* -------------------------------  PARSER  -------------------------------- */
 
