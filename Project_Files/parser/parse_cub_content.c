@@ -6,7 +6,11 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/03 14:24:46 by stopp            ###   ########.fr       */
+=======
+/*   Updated: 2024/09/03 14:08:27 by chorst           ###   ########.fr       */
+>>>>>>> 7828ec9e8ed18dda6f384e549411195a27a06c58
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +36,26 @@ bool	find_first_map_line(char *str)
 }
 
 // Function that extracts the map from char **cub_content
-char	**extract_map(t_data *data)
+char	**extract_map(char *argv, t_data *data)
 {
 	int		i;
 	int		y;
 	char	**map;
+	int		fd;
 
 	i = 0;
 	y = 0;
+	fd = open(argv, O_RDONLY);
+	if (fd == -1)
+		return (NULL);
 	while (find_first_map_line(data->cub_cont[i]) == false && data->cub_cont[i])
 		i++;
 	if (!data->cub_cont[i] || !data->cub_cont[i + 1])
 		return (NULL);
-	map = malloc(sizeof(char *) * (ft_strlen(*data->cub_cont) - i + 1));
+	map = malloc(sizeof(char *) * (file_line_count(fd) - i + 1));
 	if (!map)
-		return (NULL);
+		return (close(fd), NULL);
+	close(fd);
 	while (data->cub_cont[i])
 		map[y++] = remove_chars(data->cub_cont[i++], "\n");
 	map[y] = NULL;
@@ -90,7 +99,6 @@ void	extract_player_data(t_data *data)
 
 	x = 0;
 	y = 0;
-	data->p_pos = malloc(sizeof(t_pos)); // remove after initialization
 	while (data->map[x])
 	{
 		y = 0;
@@ -113,15 +121,15 @@ void	extract_player_data(t_data *data)
 }
 
 // Main extraction function that calls all the other extraction functions
-int	extract_cub_data(t_data *data)
+int	extract_cub_data(char *argv, t_data *data)
 {
-	data->map = extract_map(data);
+	data->map = extract_map(argv, data);
 	if (data->map == NULL)
-		return (printf("Map extraction failed"));
+		return (error_msg("Map extraction failed"));
 	extract_paths_and_rgbs(data);
 	if (data->north == NULL || data->south == NULL || data->west == NULL
 		|| data->east == NULL || data->ceiling == NULL || data->floor == NULL)
-		return (printf("Path or RGB extraction failed"));
+		return (error_msg("Path or RGB extraction failed"));
 	extract_player_data(data);
 	return (0);
 }

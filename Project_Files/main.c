@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 14:22:55 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 14:37:40 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	error_msg(char *str)
 	return (1);
 }
 
-int	input_chk(int argc, char *argv[])
+int	input_check(int argc, char *argv[])
 {
 	int	i;
 
@@ -54,17 +54,19 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	// implement error handling here
-	if (input_chk(argc, argv) == 1)
+	data = NULL;
+	if (input_check(argc, argv))
 		return (1);
-	// implement initialization here
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (error_msg("Malloc failed"));
-	if (parse_cub_file(argv[1], data) == 1 || extract_cub_data(data) == 1)
+	if (init_data(&data))
+		return (1);
+	if (parse_cub_file(argv[1], data))
+		return (1);
+	if (error_check(data))
+		return (1);
+	if (extract_cub_data(argv[1], data) == 1)
 		return (1);
 	print_values(data);
-	raycast_exe(data);
+	// raycast_exe(data);
 	free(data->cub_cont);
 	return (0);
 }
