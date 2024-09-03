@@ -6,7 +6,7 @@
 #    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/03 10:57:39 by chorst           ###   ########.fr        #
+#    Updated: 2024/09/03 14:59:33 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,15 +31,15 @@ OBJ_DIR := obj
 # Source files
 SRCS    :=	gnl/get_next_line.c \
 			gnl/get_next_line_utils.c \
-			Project_files/error_handler/error_handler1.c \
-			project_files/main.c \
-			project_files/helper/helper1.c \
-			project_files/helper/helper2.c \
-			project_files/initialization/init_data.c \
-			project_files/parser/parse_cub_content.c \
-			project_files/parser/parse_cub_file.c \
-			project_files/raycasting/raycasting.c \
-			project_files/raycasting/test_functions.c \
+			src/error_handler/error_handler1.c \
+			src/main.c \
+			src/helper/helper1.c \
+			src/helper/helper2.c \
+			src/initialization/init_data.c \
+			src/parser/parse_cub_content.c \
+			src/parser/parse_cub_file.c \
+			src/raycasting/raycasting.c \
+			src/raycasting/test_functions.c \
 
 # Object files
 OBJS    := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
