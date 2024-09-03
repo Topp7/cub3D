@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:35:42 by chorst            #+#    #+#             */
-/*   Updated: 2024/08/30 17:59:24 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/02 16:27:10 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_cub_file(char *cub_file, t_data *data)
 	close(fd);
 	fd = open(cub_file, O_RDONLY);
 	if (fd == -1)
-		return (1);
+		return (printf("Parsing failed"));
 	data->cub_cont[i] = get_next_line(fd);
 	while (data->cub_cont[i] != NULL)
 	{

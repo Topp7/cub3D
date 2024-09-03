@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 18:01:38 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 10:58:55 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,17 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
+	// implement error handling here
 	if (input_chk(argc, argv) == 1)
 		return (1);
+	// implement initialization here
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (error_msg("Malloc failed"));
-	if (parse_cub_file(argv[1], data) == 1)
+	if (parse_cub_file(argv[1], data) == 1 || extract_cub_data(data) == 1)
 		return (1);
-	if (data->cub_cont == NULL)
-		return (error_msg("No file found"));
-	data->map = extract_map(data);
-	if (data->map == NULL)
-		return (error_msg("No map found"));
-	print2d_array(data->map);
-	extract_paths(data);
-	extract_rgb(data);
-	raycast_exe(data);
+	// print_values(data);
+	// raycast_exe(data);
 	free(data->cub_cont);
 	return (0);
 }
