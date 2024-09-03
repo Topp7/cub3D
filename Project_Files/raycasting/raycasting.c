@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 14:16:03 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:36:01 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ void	draw_map(t_data *data)
 		while (data->map[x][y])
 		{
 			if (data->map[x][y] == '1')
-				draw_map_blocks(data, y, x, 0x0000FF00 | 255);
+				draw_map_blocks(data, y, x, data->c_rgb);
 			else if (data->map[x][y] == '0' || data->map[x][y] == 'S')
-				draw_map_blocks(data, y, x, 0x00F00F00 | 100);
+				draw_map_blocks(data, y, x, data->f_rgb);
 			y++;
 		}
 		x++;
@@ -128,7 +128,7 @@ void	draw_player(t_data *data)
 
 	x = 0;
 	y = 0;
-	data->p_img = mlx_new_image(data->mlx_ptr, 1000, 1000);
+	data->p_img = mlx_new_image(data->mlx_ptr, 2000, 1000);
 	if (!data->img)
 		return ;
 	while (x < 10)
@@ -149,10 +149,10 @@ void	draw_player(t_data *data)
 void	raycast_exe(t_data *data)
 {
 	add_testdata(data);
-	data->mlx_ptr = mlx_init(2000, 1000, "Test", true);
+	data->mlx_ptr = mlx_init(2000, 1000, "cub3d", true);
 	if (!data->mlx_ptr)
 		return ;
-	data->img = mlx_new_image(data->mlx_ptr, 1000, 1000);
+	data->img = mlx_new_image(data->mlx_ptr, 2000, 1000);
 	if (!data->img)
 		return ;
 	draw_map(data);

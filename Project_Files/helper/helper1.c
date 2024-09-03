@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 14:35:32 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 14:56:14 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_values(t_data *data)
 	printf("\n");
 	print2d_array(data->map);
 	printf("\n");
-	printf("Player position: x(%d) y(%d)\n", data->p_pos->px, data->p_pos->py);
+	printf("Player position: x(%f) y(%f)\n", data->p_pos->px, data->p_pos->py);
 	printf("Player direction: %c\n", data->p_direction);
 }
 
@@ -65,6 +65,6 @@ unsigned int	extract_rgb(char *rgb)
 	while (rgb_split[i])
 		free(rgb_split[i++]);
 	free(rgb_split);
-	hex = rgb_values[0] << 16 | rgb_values[1] << 8 | rgb_values[2];
+	hex = rgb_values[0] << 24 | rgb_values[1] << 16 | rgb_values[2] << 8 | 255;
 	return (hex);
 }

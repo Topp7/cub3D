@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 14:37:40 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 14:38:35 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 	if (extract_cub_data(argv[1], data) == 1)
 		return (1);
 	print_values(data);
-	// raycast_exe(data);
+	raycast_exe(data);
 	free(data->cub_cont);
 	return (0);
 }

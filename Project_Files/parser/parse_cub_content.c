@@ -6,11 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/03 14:24:46 by stopp            ###   ########.fr       */
-=======
-/*   Updated: 2024/09/03 14:08:27 by chorst           ###   ########.fr       */
->>>>>>> 7828ec9e8ed18dda6f384e549411195a27a06c58
+/*   Updated: 2024/09/03 14:44:40 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +84,8 @@ void	extract_paths_and_rgbs(t_data *data)
 			data->floor = remove_chars(&data->cub_cont[x][1 + y], " \n");
 		x++;
 	}
-	extract_rgbs(data);
+	data->f_rgb = extract_rgb(data->floor);
+	data->c_rgb = extract_rgb(data->ceiling);
 }
 
 // Function that extracts the player position and direction from the map
