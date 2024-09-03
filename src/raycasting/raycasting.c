@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 15:36:01 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 16:31:09 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,22 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 		mlx_delete_image(data->mlx_ptr, data->p_img);
 		data->p_pos->pa -= 0.1;
 		if (data->p_pos->pa < 0)
-			data->p_pos->pa = ((2 * PI) - 0.1);
+			data->p_pos->pa += (2 * PI);
 		data->p_pos->pdx = (float)(sin(data->p_pos->pa) / 10);
 		data->p_pos->pdy = (float)(cos(data->p_pos->pa) / 10);
 		draw_player(data);
+		printf("pa: %f\n", data->p_pos->pa);
 	}
 	if (keydata.key == MLX_KEY_RIGHT)
 	{
 		mlx_delete_image(data->mlx_ptr, data->p_img);
 		data->p_pos->pa += 0.1;
 		if (data->p_pos->pa > (2 * PI))
-			data->p_pos->pa = (0 + 0.1);
+			data->p_pos->pa = (data->p_pos->pa - (2 * PI));
 		data->p_pos->pdx = (float)(sin(data->p_pos->pa) / 10);
 		data->p_pos->pdy = (float)(cos(data->p_pos->pa) / 10);
 		draw_player(data);
+		printf("pa: %f\n", data->p_pos->pa);
 	}
 }
 
@@ -109,10 +111,10 @@ void	draw_ray(t_data *data)
 	float	y;
 	int		i;
 
-	x = 5;
-	y = 5;
+	x = (data->p_pos->px * 100) + 5;
+	y = (data->p_pos->py * 100) + 5;;
 	i = 0;
-	while (i < 15)
+	while (i < 30)
 	{
 		mlx_put_pixel(data->p_img, y, x, 0x000FF000 | 255);
 		x += (data->p_pos->pdx * 10);
@@ -123,27 +125,30 @@ void	draw_ray(t_data *data)
 
 void	draw_player(t_data *data)
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
+	int		i;
+	int		j;
 
-	x = 0;
-	y = 0;
+	x = data->p_pos->px * 100;
+	y = data->p_pos->py * 100;
 	data->p_img = mlx_new_image(data->mlx_ptr, 2000, 1000);
 	if (!data->img)
 		return ;
-	while (x < 10)
+	i = 0;
+	while (i < 10)
 	{
-		y = 0;
-		while (y < 10)
+		j = 0;
+		while (j < 10)
 		{
-			mlx_put_pixel(data->p_img, y, x, 0x00FF0000 | 255);
-			y++;
+			mlx_put_pixel(data->p_img, y + j, x + i, 0x00FF0000 | 255);
+			j++;
 		}
-		x++;
+		i++;
 	}
 	draw_ray(data);
 	mlx_image_to_window(data->mlx_ptr, data->p_img,
-		(data->p_pos->py * 100), (data->p_pos->px * 100));
+		0, 0);
 }
 
 void	raycast_exe(t_data *data)
