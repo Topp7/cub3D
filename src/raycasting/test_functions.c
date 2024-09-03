@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:05:20 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/02 17:06:39 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 17:48:45 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	add_testdata(t_data *data)
 {
-	data->p_direction = 'W';
-	data->p_pos = malloc(sizeof(t_pos));
-	if (!data->p_pos)
-		return ;
-	data->p_pos->px = 3.5;
-	data->p_pos->py = 1.5;
+	// data->p_direction = 'W';
+	// data->p_pos = malloc(sizeof(t_pos));
+	// if (!data->p_pos)
+	// 	return ;
+	// data->p_pos->px = 3.5;
+	// data->p_pos->py = 1.5;
 	if (data->p_direction == 'S')
 		data->p_pos->pa = 0.5 * PI;
 	else if (data->p_direction == 'N')

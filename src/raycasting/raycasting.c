@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 16:31:09 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 18:06:27 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	draw_map_blocks(t_data *data, int x, int y, uint32_t color)
 
 	i = 0;
 	j = 0;
-	while (i < 99)
+	while (i < 29 && ((x * 30) + i) < 2000)
 	{
 		j = 0;
-		while (j < 99)
+		while (j < 29 && ((y * 30) + j) < 2000)
 		{
-			mlx_put_pixel(data->img, ((y * 100) + j),
-				((x * 100) + i), color);
+			mlx_put_pixel(data->img, ((y * 30) + j),
+				((x * 30) + i), color);
 			j++;
 		}
 		i++;
@@ -95,9 +95,9 @@ void	draw_map(t_data *data)
 		while (data->map[x][y])
 		{
 			if (data->map[x][y] == '1')
-				draw_map_blocks(data, y, x, data->c_rgb);
-			else if (data->map[x][y] == '0' || data->map[x][y] == 'S')
-				draw_map_blocks(data, y, x, data->f_rgb);
+				draw_map_blocks(data, x, y, data->c_rgb);
+			else if (data->map[x][y] == '0' || data->map[x][y] == data->p_direction)
+				draw_map_blocks(data, x, y, data->f_rgb);
 			y++;
 		}
 		x++;
@@ -111,8 +111,8 @@ void	draw_ray(t_data *data)
 	float	y;
 	int		i;
 
-	x = (data->p_pos->px * 100) + 5;
-	y = (data->p_pos->py * 100) + 5;;
+	x = (data->p_pos->px * 30) + 5;
+	y = (data->p_pos->py * 30) + 5;
 	i = 0;
 	while (i < 30)
 	{
@@ -130,8 +130,8 @@ void	draw_player(t_data *data)
 	int		i;
 	int		j;
 
-	x = data->p_pos->px * 100;
-	y = data->p_pos->py * 100;
+	x = data->p_pos->px * 30;
+	y = data->p_pos->py * 30;
 	data->p_img = mlx_new_image(data->mlx_ptr, 2000, 1000);
 	if (!data->img)
 		return ;
