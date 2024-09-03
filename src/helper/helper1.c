@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 14:56:14 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:37:07 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ unsigned int	extract_rgb(char *rgb)
 		free(rgb_split[i++]);
 	free(rgb_split);
 	hex = rgb_values[0] << 24 | rgb_values[1] << 16 | rgb_values[2] << 8 | 255;
+	free(rgb_values);
 	return (hex);
 }
