@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/02 18:47:34 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 10:23:48 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ bool	find_first_map_line(char *str)
 char	**extract_map(t_data *data)
 {
 	int		i;
-	int		j;
+	int		y;
 	char	**map;
 
 	i = 0;
-	j = 0;
+	y = 0;
 	while (find_first_map_line(data->cub_cont[i]) == false && data->cub_cont[i])
 		i++;
 	if (!data->cub_cont[i] || !data->cub_cont[i + 1])
@@ -48,37 +48,39 @@ char	**extract_map(t_data *data)
 	if (!map)
 		return (NULL);
 	while (data->cub_cont[i])
-		map[j++] = remove_chars(data->cub_cont[i++], "\n");
-	map[j] = NULL;
+		map[y++] = remove_chars(data->cub_cont[i++], "\n");
+	map[y] = NULL;
 	return (map);
 }
 
 // Function that extracts the paths and rgb values from char **cub_content
 void	extract_paths_and_rgbs(t_data *data)
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 
-	i = 0;
-	while (data->cub_cont[i])
+	x = 0;
+	while (data->cub_cont[x])
 	{
-		j = 0;
-		while (data->cub_cont[i][j] == ' ')
-			j++;
-		if (data->cub_cont[i][j] == 'N' && data->cub_cont[i][j + 1] == 'O')
-			data->north = remove_chars(&data->cub_cont[i][2 + j], " \n");
-		else if (data->cub_cont[i][j] == 'S' && data->cub_cont[i][j + 1] == 'O')
-			data->south = remove_chars(&data->cub_cont[i][2 + j], " \n");
-		else if (data->cub_cont[i][j] == 'W' && data->cub_cont[i][j + 1] == 'E')
-			data->west = remove_chars(&data->cub_cont[i][2 + j], " \n");
-		else if (data->cub_cont[i][j] == 'E' && data->cub_cont[i][j + 1] == 'A')
-			data->east = remove_chars(&data->cub_cont[i][2 + j], " \n");
-		else if (data->cub_cont[i][j] == 'C' && data->cub_cont[i][j + 1] == ' ')
-			data->ceiling = remove_chars(&data->cub_cont[i][1 + j], " \n");
-		else if (data->cub_cont[i][j] == 'F' && data->cub_cont[i][j + 1] == ' ')
-			data->floor = remove_chars(&data->cub_cont[i][1 + j], " \n");
-		i++;
+		y = 0;
+		while (data->cub_cont[x][y] == ' ')
+			y++;
+		if (data->cub_cont[x][y] == 'N' && data->cub_cont[x][y + 1] == 'O')
+			data->north = remove_chars(&data->cub_cont[x][2 + y], " \n");
+		else if (data->cub_cont[x][y] == 'S' && data->cub_cont[x][y + 1] == 'O')
+			data->south = remove_chars(&data->cub_cont[x][2 + y], " \n");
+		else if (data->cub_cont[x][y] == 'W' && data->cub_cont[x][y + 1] == 'E')
+			data->west = remove_chars(&data->cub_cont[x][2 + y], " \n");
+		else if (data->cub_cont[x][y] == 'E' && data->cub_cont[x][y + 1] == 'A')
+			data->east = remove_chars(&data->cub_cont[x][2 + y], " \n");
+		else if (data->cub_cont[x][y] == 'C' && data->cub_cont[x][y + 1] == ' ')
+			data->ceiling = remove_chars(&data->cub_cont[x][1 + y], " \n");
+		else if (data->cub_cont[x][y] == 'F' && data->cub_cont[x][y + 1] == ' ')
+			data->floor = remove_chars(&data->cub_cont[x][1 + y], " \n");
+		x++;
 	}
+	data->c_rgb = extract_rgb(data->ceiling);
+	data->f_rgb = extract_rgb(data->floor);
 }
 
 // Function that extracts the player position and direction from the map

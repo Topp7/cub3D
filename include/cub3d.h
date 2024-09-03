@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/02 18:46:15 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 10:46:57 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 
 /* -------------------------------- LIBRARIES ------------------------------- */
 
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../lib/libft/libft.h"
+# include <fcntl.h>
+# include <limits.h>
+# include <math.h>
+# include <pthread.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdint.h>
-# include <unistd.h>
-# include <limits.h>
-# include <pthread.h>
 # include <sys/time.h>
-# include <math.h>
-# include <fcntl.h>
-# include "../lib/libft/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include <unistd.h>
 
 /* ------------------------------ WINDOW SIZE ------------------------------- */
 
@@ -43,9 +43,9 @@
 
 typedef struct s_pos
 {
-	int	px;
-	int	py;
-}	t_pos;
+	int			px;
+	int			py;
+}				t_pos;
 
 typedef struct s_data
 {
@@ -58,23 +58,19 @@ typedef struct s_data
 	char		*west;
 	char		*east;
 	char		*ceiling;
+	int			*c_rgb;
 	char		*floor;
+	int			*f_rgb;
 	char		player_direction;
 	t_pos		*player_pos;
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*img;
 	mlx_image_t	*pl_img;
-}	t_data;
+}				t_data;
 
-/* ------------------------------- FUNCTIONS -------------------------------- */
-
-//	src/raycasting.c
-void	raycast_exe(t_data *data);
-
-//	src/test_functions.c
-void	add_testdata(t_data *data);
-
-//	main.c
+// #############################################################################
+// --------------------------- External Files ----------------------------------
+// #############################################################################
 
 /* ---------------------------------  GNL  ---------------------------------- */
 
@@ -87,30 +83,43 @@ int		str_alloc_len(char *str);
 void	str_after_n(char *str);
 void	*ft_realloc(void *ptr, size_t new_size, int i);
 
+// #############################################################################
+// ---------------------------- Project Files ----------------------------------
+// #############################################################################
+
 /* -------------------------------  HELPERS  -------------------------------- */
 
-// helper1.c
+// project_files/helper/helper1.c
 void	print2d_array(char **array);
 void	print_values(t_data *data);
+int		*extract_rgb(char *rgb);
+int		int_into_hex(int *rgb);
 
-// helper2.c
+// project_files/helper/helper2.c
 int		count_relevant_chars(const char *str, const char *chrs_to_rmv);
 void	remove_helper(const char *str, const char *chrs_to_rmv, char *new_s);
 char	*remove_chars(const char *s, const char *chrs_to_rmv);
 
 /* -------------------------------  PARSER  -------------------------------- */
 
-// parse_cub_file.c
-int		file_line_count(int fd);
-int		parse_cub_file(char *cub_file, t_data *data);
-
-// parse_cub_content.c
+//	project_files/parser/parse_cub_content.c
 bool	find_first_map_line(char *str);
 char	**extract_map(t_data *data);
 void	extract_paths_and_rgbs(t_data *data);
 void	extract_player_data(t_data *data);
 int		extract_cub_data(t_data *data);
 
+//	project_files/parser/parse_cub_file.c
+int		file_line_count(int fd);
+int		parse_cub_file(char *cub_file, t_data *data);
+
+/* ------------------------------ RAYCASTING ------------------------------ */
+
+//	project_files/raycasting/raycasting.c
+void	raycast_exe(t_data *data);
+
+//	project_files/raycasting/test_functions.c
+void	add_testdata(t_data *data);
 
 //	main.c
 
