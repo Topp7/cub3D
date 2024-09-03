@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 10:32:51 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:28:38 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	print_values(t_data *data)
 	printf("%s\n", data->west);
 	printf("%s\n", data->east);
 	printf("\n");
-	printf("c_rgb: R:%i G:%i B:%i\n", data->c_rgb[0], data->c_rgb[1], data->c_rgb[2]);
-	printf("f_rgb: R:%i G:%i B:%i\n", data->f_rgb[0], data->f_rgb[1], data->f_rgb[2]);
+	printf("Ceiling color: %d\n", data->c_rgb);
+	printf("Floor color: %d\n", data->f_rgb);
 	printf("\n");
 	print2d_array(data->map);
 	printf("\n");
@@ -44,32 +44,27 @@ void	print_values(t_data *data)
 }
 
 // Function that extracts the RGB values from a string
-int	*extract_rgb(char *rgb)
+unsigned int	extract_rgb(char *rgb)
 {
-	int		*rgb_values;
-	char	**rgb_split;
-	int		i;
+	int				*rgb_values;
+	char			**rgb_split;
+	int				i;
+	unsigned int	hex;
 
 	i = 0;
+	hex = 0;
 	rgb_values = malloc(sizeof(int) * 3);
 	if (!rgb_values)
-		return (NULL);
+		return (1);
 	rgb_split = ft_split(rgb, ',');
 	if (!rgb_split)
-		return (NULL);
+		return (1);
 	rgb_values[0] = ft_atoi(rgb_split[0]);
 	rgb_values[1] = ft_atoi(rgb_split[1]);
 	rgb_values[2] = ft_atoi(rgb_split[2]);
 	while (rgb_split[i])
 		free(rgb_split[i++]);
-	return (rgb_values);
-}
-
-int	int_into_hex(int *rgb)
-{
-	int		hex;
-
-	hex = 0;
-	hex = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	free(rgb_split);
+	hex = rgb_values[0] << 16 | rgb_values[1] << 8 | rgb_values[2];
 	return (hex);
 }
