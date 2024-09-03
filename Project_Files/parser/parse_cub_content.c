@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 10:23:48 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:24:46 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void	extract_paths_and_rgbs(t_data *data)
 			data->floor = remove_chars(&data->cub_cont[x][1 + y], " \n");
 		x++;
 	}
-	data->c_rgb = extract_rgb(data->ceiling);
-	data->f_rgb = extract_rgb(data->floor);
+	extract_rgbs(data);
 }
 
 // Function that extracts the player position and direction from the map
@@ -91,7 +90,7 @@ void	extract_player_data(t_data *data)
 
 	x = 0;
 	y = 0;
-	data->player_pos = malloc(sizeof(t_pos)); // remove after initialization
+	data->p_pos = malloc(sizeof(t_pos)); // remove after initialization
 	while (data->map[x])
 	{
 		y = 0;
@@ -102,9 +101,9 @@ void	extract_player_data(t_data *data)
 				|| data->map[x][y] == 'S'
 				|| data->map[x][y] == 'W')
 			{
-				data->player_pos->px = x;
-				data->player_pos->py = y;
-				data->player_direction = data->map[x][y];
+				data->p_pos->px = x;
+				data->p_pos->py = y;
+				data->p_direction = data->map[x][y];
 				return ;
 			}
 			y++;
