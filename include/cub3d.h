@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 17:58:42 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/02 18:37:29 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 
 # define WIDTH 256
 # define HEIGHT 256
+# define PI 3.14159265359
 
 /* -------------------------------- STRUCTS --------------------------------- */
 
@@ -45,6 +46,9 @@ typedef struct s_pos
 {
 	float	px; // von oben nach unten
 	float	py;
+	float	pa;
+	float	pdx;
+	float	pdy;
 }	t_pos;
 
 typedef struct s_data
@@ -59,11 +63,11 @@ typedef struct s_data
 	char		*east;
 	char		*ceiling;
 	char		*floor;
-	char		player_direction;
-	t_pos		*player_pos;
+	char		p_direction;
+	t_pos		*p_pos;
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*img;
-	mlx_image_t	*pl_img;
+	mlx_image_t	*p_img;
 }	t_data;
 
 /* ------------------------------- FUNCTIONS -------------------------------- */

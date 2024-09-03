@@ -6,11 +6,13 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/08/30 17:49:43 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/03 14:16:03 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	draw_player(t_data *data);
 
 void	control_keyhook(mlx_key_data_t keydata, void *param)
 {
@@ -23,13 +25,39 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 			mlx_close_window(data->mlx_ptr);
 	}
 	if (keydata.key == MLX_KEY_UP)
-		data->pl_img->instances[0].y -= 5;
+	{
+		mlx_delete_image(data->mlx_ptr, data->p_img);
+		data->p_pos->px += data->p_pos->pdx;
+		data->p_pos->py += data->p_pos->pdy;
+		draw_player(data);
+	}
 	if (keydata.key == MLX_KEY_DOWN)
-		data->pl_img->instances[0].y += 5;
+	{
+		mlx_delete_image(data->mlx_ptr, data->p_img);
+		data->p_pos->px -= data->p_pos->pdx;
+		data->p_pos->py -= data->p_pos->pdy;
+		draw_player(data);
+	}
 	if (keydata.key == MLX_KEY_LEFT)
-		data->pl_img->instances[0].x -= 5;
+	{
+		mlx_delete_image(data->mlx_ptr, data->p_img);
+		data->p_pos->pa -= 0.1;
+		if (data->p_pos->pa < 0)
+			data->p_pos->pa = ((2 * PI) - 0.1);
+		data->p_pos->pdx = (float)(sin(data->p_pos->pa) / 10);
+		data->p_pos->pdy = (float)(cos(data->p_pos->pa) / 10);
+		draw_player(data);
+	}
 	if (keydata.key == MLX_KEY_RIGHT)
-		data->pl_img->instances[0].x += 5;
+	{
+		mlx_delete_image(data->mlx_ptr, data->p_img);
+		data->p_pos->pa += 0.1;
+		if (data->p_pos->pa > (2 * PI))
+			data->p_pos->pa = (0 + 0.1);
+		data->p_pos->pdx = (float)(sin(data->p_pos->pa) / 10);
+		data->p_pos->pdy = (float)(cos(data->p_pos->pa) / 10);
+		draw_player(data);
+	}
 }
 
 void	draw_map_blocks(t_data *data, int x, int y, uint32_t color)
@@ -65,14 +93,32 @@ void	draw_map(t_data *data)
 		while (data->map[x][y])
 		{
 			if (data->map[x][y] == '1')
-				draw_map_blocks(data, x, y, 0xFF000000 | 100);
+				draw_map_blocks(data, y, x, 0x0000FF00 | 255);
 			else if (data->map[x][y] == '0' || data->map[x][y] == 'S')
-				draw_map_blocks(data, x, y, 0x0000FF00 | 100);
+				draw_map_blocks(data, y, x, 0x00F00F00 | 100);
 			y++;
 		}
 		x++;
 	}
 	mlx_image_to_window(data->mlx_ptr, data->img, 0, 0);
+}
+
+void	draw_ray(t_data *data)
+{
+	float	x;
+	float	y;
+	int		i;
+
+	x = 5;
+	y = 5;
+	i = 0;
+	while (i < 15)
+	{
+		mlx_put_pixel(data->p_img, y, x, 0x000FF000 | 255);
+		x += (data->p_pos->pdx * 10);
+		y += (data->p_pos->pdy * 10);
+		i++;
+	}
 }
 
 void	draw_player(t_data *data)
@@ -82,18 +128,22 @@ void	draw_player(t_data *data)
 
 	x = 0;
 	y = 0;
-	while (x < 25)
+	data->p_img = mlx_new_image(data->mlx_ptr, 1000, 1000);
+	if (!data->img)
+		return ;
+	while (x < 10)
 	{
 		y = 0;
-		while (y < 25)
+		while (y < 10)
 		{
-			mlx_put_pixel(data->pl_img, y, x, 0x00FF0000 | 255);
+			mlx_put_pixel(data->p_img, y, x, 0x00FF0000 | 255);
 			y++;
 		}
 		x++;
 	}
-	mlx_image_to_window(data->mlx_ptr, data->pl_img,
-		(data->player_pos->py * 100), (data->player_pos->px * 100));
+	draw_ray(data);
+	mlx_image_to_window(data->mlx_ptr, data->p_img,
+		(data->p_pos->py * 100), (data->p_pos->px * 100));
 }
 
 void	raycast_exe(t_data *data)
@@ -103,9 +153,6 @@ void	raycast_exe(t_data *data)
 	if (!data->mlx_ptr)
 		return ;
 	data->img = mlx_new_image(data->mlx_ptr, 1000, 1000);
-	if (!data->img)
-		return ;
-	data->pl_img = mlx_new_image(data->mlx_ptr, 1000, 1000);
 	if (!data->img)
 		return ;
 	draw_map(data);
