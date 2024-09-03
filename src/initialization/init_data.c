@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:26:04 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 11:49:21 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 15:32:02 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	init_data(t_data **data)
 		printf("Malloc failed\n");
 		return (1);
 	}
-	(*data)->player_pos = malloc(sizeof(t_pos));
-	if ((*data)->player_pos == NULL)
+	(*data)->p_pos = malloc(sizeof(t_pos));
+	if ((*data)->p_pos == NULL)
 	{
 		printf("Error\n");
 		printf("Malloc failed\n");

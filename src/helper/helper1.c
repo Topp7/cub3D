@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 14:57:49 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 15:31:47 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	print_values(t_data *data)
 	printf("\n");
 	print2d_array(data->map);
 	printf("\n");
-	printf("Player position: x(%d) y(%d)\n", data->player_pos->px, data->player_pos->py);
-	printf("Player direction: %c\n", data->player_direction);
+	printf("Player position: x(%f) y(%f)\n", data->p_pos->px, data->p_pos->py);
+	printf("Player direction: %c\n", data->p_direction);
 }
 
 // Function that extracts the RGB values from a string

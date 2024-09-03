@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 15:29:56 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 15:31:34 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,18 @@
 
 # define WIDTH 256
 # define HEIGHT 256
+# define PI 3.14159265359
 
 /* -------------------------------- STRUCTS --------------------------------- */
 
 typedef struct s_pos
 {
-	int				px;
-	int				py;
-}					t_pos;
+	float	px; // von oben nach unten
+	float	py;
+	float	pa;
+	float	pdx;
+	float	pdy;
+}	t_pos;
 
 typedef struct s_data
 {
@@ -65,7 +69,7 @@ typedef struct s_data
 	t_pos			*p_pos;
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*img;
-	mlx_image_t		*pp_img;
+	mlx_image_t		*p_img;
 }					t_data;
 
 // #############################################################################
