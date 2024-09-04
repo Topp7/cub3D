@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 15:32:18 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/03 18:04:59 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	extract_player_data(t_data *data)
 				|| data->map[x][y] == 'S'
 				|| data->map[x][y] == 'W')
 			{
-				data->p_pos->px = x;
-				data->p_pos->py = y;
+				data->p_pos->px = x + 0.5;
+				data->p_pos->py = y + 0.5;
 				data->p_direction = data->map[x][y];
 				return ;
 			}
