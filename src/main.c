@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 15:33:15 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/04 11:46:30 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse_cub_file(argv[1], data))
 		return (1);
-	if (error_check(data))
-		return (1);
+	// if (error_check(data))
+	// 	return (1);
 	if (extract_cub_data(argv[1], data) == 1)
 		return (1);
 	print_values(data);

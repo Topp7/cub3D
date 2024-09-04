@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 15:31:34 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/04 11:40:36 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@
 
 typedef struct s_pos
 {
-	float	px; // von oben nach unten
-	float	py;
-	float	pa;
-	float	pdx;
-	float	pdy;
-}	t_pos;
+	float			px;
+	float			py;
+	float			pa;
+	float			pdx;
+	float			pdy;
+}					t_pos;
 
 typedef struct s_data
 {
@@ -79,65 +79,66 @@ typedef struct s_data
 /* ---------------------------------  GNL  ---------------------------------- */
 
 //	get_next_line.c
-char			*read_better(int fd, char **str, char *newline, int n);
-char			*get_next_line(int fd);
+char				*read_better(int fd, char **str, char *newline, int n);
+char				*get_next_line(int fd);
 
 //	get_next_line_utils.c
-int				str_alloc_len(char *str);
-void			str_after_n(char *str);
-void			*ft_realloc(void *ptr, size_t new_size, int i);
+int					str_alloc_len(char *str);
+void				str_after_n(char *str);
+void				*ft_realloc(void *ptr, size_t new_size, int i);
 
 // #############################################################################
-// ---------------------------- Project Files ----------------------------------
+// --------------------------------- SRC ---------------------------------------
 // #############################################################################
 
-/* ---------------------------  ERROR HANDLER  ---------------------------- */
+/* ---------------------------  ERROR HANDLER  ------------------------------ */
 
 //	src/error_handling/error_handler1.c
-int				error_check(t_data *data);
-int				check_for_directions(t_data *data);
-int				check_for_nonsense(t_data *data);
-
+int					error_check(t_data *data);
+int					check_for_directions(t_data *data);
+int					check_for_nonsense(t_data *data);
 
 /* -------------------------------  HELPERS  -------------------------------- */
 
 // src/helper/helper1.c
-void			print2d_array(char **array);
-void			print_values(t_data *data);
-unsigned int	extract_rgb(char *rgb);
+void				print2d_array(char **array);
+void				print_values(t_data *data);
+unsigned int		extract_rgb(char *rgb);
 
 // src/helper/helper2.c
-int				count_relevant_chars(const char *str, const char *chrs_to_rmv);
-void			remove_helper(const char *str, const char *chrs_to_rmv, char *new_s);
-char			*remove_chars(const char *s, const char *chrs_to_rmv);
+int					count_relevant_chars(const char *str,
+						const char *chrs_to_rmv);
+void				remove_helper(const char *str, const char *chrs_to_rmv,
+						char *new_s);
+char				*remove_chars(const char *s, const char *chrs_to_rmv);
 
 /* ---------------------------  INITIALIZATION  ---------------------------- */
 
 //	src/initialization/init_data.c
-int				init_data(t_data **data);
+int					init_data(t_data **data);
 
 /* -------------------------------  PARSER  -------------------------------- */
 
 //	src/parser/parse_cub_content.c
-bool			find_first_map_line(char *str);
-char			**extract_map(char *argv, t_data *data);
-void			extract_paths_and_rgbs(t_data *data);
-void			extract_player_data(t_data *data);
-int				extract_cub_data(char *str, t_data *data);
+bool				find_first_map_line(char *str);
+char				**extract_map(char *argv, t_data *data);
+void				extract_paths_and_rgbs(t_data *data);
+void				extract_player_data(t_data *data);
+int					extract_cub_data(char *str, t_data *data);
 
 //	src/parser/parse_cub_file.c
-int				file_line_count(int fd);
-int				parse_cub_file(char *cub_file, t_data *data);
+int					file_line_count(int fd);
+int					parse_cub_file(char *cub_file, t_data *data);
 
 /* ------------------------------ RAYCASTING ------------------------------ */
 
 //	src/raycasting/raycasting.c
-void	raycast_exe(t_data *data);
+void				raycast_exe(t_data *data);
 
 //	src/raycasting/test_functions.c
-void	add_testdata(t_data *data);
+void				add_testdata(t_data *data);
 
 //	main.c
-int		error_msg(char *str);
+int					error_msg(char *str);
 
 #endif
