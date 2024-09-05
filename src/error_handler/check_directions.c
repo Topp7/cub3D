@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:45 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/05 13:54:31 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/05 14:59:32 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,3 @@ int	check_directions(t_data data)
 	free(t.flag);
 	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/05 14:11:53 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/05 14:58:38 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,11 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = NULL;
-	if (input_check(argc, argv))
-		return (1);
-	if (init_data(&data))
-		return (1);
-	if (parse_cub_file(argv[1], data))
-		return (1);
-	if (error_checks(data))
-		return (1);
-	if (extract_cub_data(argv[1], data))
+	if (input_check(argc, argv)
+		|| init_data(&data)
+		|| parse_cub_file(argv[1], data)
+		|| error_checks(data)
+		|| extract_cub_data(argv[1], data))
 		return (1);
 	print_values(data);
 	// raycast_exe(data);
