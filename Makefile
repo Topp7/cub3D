@@ -6,7 +6,7 @@
 #    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/04 16:25:44 by chorst           ###   ########.fr        #
+#    Updated: 2024/09/04 16:56:38 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,10 @@ OBJ_DIR := obj
 # Source files
 SRCS    :=	gnl/get_next_line.c \
 			gnl/get_next_line_utils.c \
-			src/error_handler/check_all.c \
 			src/error_handler/check_directions.c \
 			src/error_handler/check_nonsense.c \
 			src/error_handler/check_rgb.c \
+			src/error_handler/error_checks.c \
 			src/main.c \
 			src/helper/helper1.c \
 			src/helper/helper2.c \

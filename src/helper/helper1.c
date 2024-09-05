@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 15:37:07 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/05 13:32:01 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,24 @@ unsigned int	extract_rgb(char *rgb)
 	hex = rgb_values[0] << 24 | rgb_values[1] << 16 | rgb_values[2] << 8 | 255;
 	free(rgb_values);
 	return (hex);
+}
+
+void	init_temp_struct(t_temp *temp)
+{
+	temp->i = 0;
+	temp->j = 0;
+	temp->k = 0;
+	temp->x = 0;
+	temp->y = 0;
+	temp->count = 0;
+	temp->flag = malloc(sizeof(bool) * 6);
+	if (!temp->flag)
+		return ;
+	while (temp->count < 6)
+		temp->flag[temp->count++] = false;
+	temp->count = 0;
+	temp->fd = 0;
+	temp->line = NULL;
+	temp->str = NULL;
+
 }

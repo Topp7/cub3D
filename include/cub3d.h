@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/04 16:23:39 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/05 13:34:11 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,20 @@
 # define PI 3.14159265359
 
 /* -------------------------------- STRUCTS --------------------------------- */
+
+typedef struct s_temp
+{
+	int				i;
+	int				j;
+	int				k;
+	int				x;
+	int				y;
+	int				count;
+	int				*flag;
+	int				fd;
+	char			*line;
+	char			*str;
+}					t_temp;
 
 typedef struct s_pos
 {
@@ -93,20 +107,19 @@ void			*ft_realloc(void *ptr, size_t new_size, int i);
 
 /* ---------------------------  ERROR HANDLER  ------------------------------ */
 
-//	src/error_handling/error_handler1.c
-int				error_checks(t_data *data);
-// int				check_for_directions(t_data *data);
-
 //	src/error_handling/check_directions.c
+int				check_directions(t_data data);
 
 //	src/error_handling/check_nonsense.c
-int				check_for_nonsense(t_data data);
-int				check_for_nonsense_1(t_data data);
-int				check_for_nonsense_2(t_data data);
+int				check_nonsense(t_data data);
+int				check_nonsense_1(t_data data);
+int				check_nonsense_2(t_data data);
 
 //	src/error_handling/check_rgb.c
-int				check_for_rgb(t_data data);
+int				check_rgb(t_data data);
 
+//	src/error_handling/error_checks.c
+int				error_checks(t_data *data);
 
 /* -------------------------------  HELPERS  -------------------------------- */
 
@@ -114,6 +127,7 @@ int				check_for_rgb(t_data data);
 void			print2d_array(char **array);
 void			print_values(t_data *data);
 unsigned int	extract_rgb(char *rgb);
+void			init_temp_struct(t_temp *temp);
 
 // src/helper/helper2.c
 int				count_relevant_chars(char *str, char *chrs_to_rmv);

@@ -6,13 +6,13 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:59 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/04 16:35:11 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/05 14:08:45 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	check_for_rgb_helper(char *str)
+int	check_rgb_helper(char *str)
 {
 	int		i;
 	int		j;
@@ -39,7 +39,7 @@ int	check_for_rgb_helper(char *str)
 	return (0);
 }
 
-int	check_for_rgb(t_data data)
+int	check_rgb(t_data data)
 {
 	int	i;
 	int	j;
@@ -54,9 +54,9 @@ int	check_for_rgb(t_data data)
 			j++;
 		if (data.cub_cont[i][j] == 'C' || data.cub_cont[i][j] == 'F')
 		{
-			if (check_for_rgb_helper(data.cub_cont[i] + j + 1) == 1)
+			if (check_rgb_helper(data.cub_cont[i] + j + 1) == 1)
 				return (1);
-			if (check_for_rgb_helper(data.cub_cont[i] + j + 1) == 2)
+			if (check_rgb_helper(data.cub_cont[i] + j + 1) == 2)
 				return (2);
 		}
 		i++;
