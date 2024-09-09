@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 18:04:59 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/09 15:19:59 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ bool	find_first_map_line(char *str)
 char	**extract_map(char *argv, t_data *data)
 {
 	int		i;
-	int		y;
+	int		x;
 	char	**map;
 	int		fd;
 
 	i = 0;
-	y = 0;
+	x = 0;
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
@@ -53,8 +53,9 @@ char	**extract_map(char *argv, t_data *data)
 		return (close(fd), NULL);
 	close(fd);
 	while (data->cub_cont[i])
-		map[y++] = remove_chars(data->cub_cont[i++], "\n");
-	map[y] = NULL;
+		map[x++] = remove_chars(data->cub_cont[i++], "\n");
+	map[x] = NULL;
+	data->map_x = x - 1;
 	return (map);
 }
 

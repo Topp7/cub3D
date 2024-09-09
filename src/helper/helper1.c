@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/05 15:05:53 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 15:28:29 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void	init_temp_struct(t_temp *temp)
 	temp->x = 0;
 	temp->y = 0;
 	temp->count = 0;
-	temp->flag = malloc(sizeof(int *) * 1);
+	temp->flag = malloc(sizeof(int) * 7);
 	if (!temp->flag)
 		return ;
-	while (temp->count < 6)
-		temp->flag[temp->count++] = false;
+	while (temp->count < 7)
+		temp->flag[temp->count++] = 0;
 	temp->count = 0;
 	temp->fd = 0;
 	temp->line = NULL;

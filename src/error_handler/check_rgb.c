@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:59 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/05 14:08:45 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 15:47:09 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	check_rgb(t_data data)
 	{
 		j = 0;
 		while (data.cub_cont[i][j] == '\n')
-			i++;
+			if (!data.cub_cont[++i])
+				return (0);
 		while (data.cub_cont[i][j] == ' ')
 			j++;
 		if (data.cub_cont[i][j] == 'C' || data.cub_cont[i][j] == 'F')
@@ -59,6 +60,8 @@ int	check_rgb(t_data data)
 			if (check_rgb_helper(data.cub_cont[i] + j + 1) == 2)
 				return (2);
 		}
+		if (!data.cub_cont[i])
+			return (0);
 		i++;
 	}
 	return (0);

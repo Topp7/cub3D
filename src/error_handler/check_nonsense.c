@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:30 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/05 13:34:27 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 14:46:10 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // Main function to check for nonsense in the file
 int	check_nonsense(t_data data)
 {
+	return (0);
 	if (check_nonsense_1(data))
 		return (1);
 	if (check_nonsense_2(data))

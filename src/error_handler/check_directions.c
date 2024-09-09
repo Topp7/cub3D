@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:45 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/05 14:59:32 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:00:47 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	regognize_direction(char *str)
 	else if (str[0] == 'E' && str[1] == 'A')
 		return (1);
 	else if (str[0] == 'C')
-		return (1);
+		return (2);
 	else if (str[0] == 'F')
-		return (1);
+		return (2);
 	return (0);
 }
 
@@ -63,7 +63,9 @@ int	check_directions(t_data data)
 			t.i++;
 		while (data.cub_cont[t.i][t.j] == ' ')
 			t.j++;
-		if (regognize_direction(data.cub_cont[t.i] + t.j) == 1)
+		if (find_first_map_line(data.cub_cont[t.i] + t.j) == true)
+			return (free(t.flag), 2);
+		if (regognize_direction(data.cub_cont[t.i] + t.j) != 0)
 		{
 			check_direction_ammount(data.cub_cont[t.i] + t.j, &t);
 			if (t.count == 6)
@@ -74,3 +76,4 @@ int	check_directions(t_data data)
 	free(t.flag);
 	return (1);
 }
+

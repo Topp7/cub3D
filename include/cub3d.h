@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/05 13:34:11 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 15:17:21 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_data
 	char			*floor;
 	unsigned int	f_rgb;
 	char			p_direction;
+	int				map_x;
 	t_pos			*p_pos;
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*img;
@@ -108,6 +109,7 @@ void			*ft_realloc(void *ptr, size_t new_size, int i);
 /* ---------------------------  ERROR HANDLER  ------------------------------ */
 
 //	src/error_handling/check_directions.c
+int				regognize_direction(char *str);
 int				check_directions(t_data data);
 
 //	src/error_handling/check_nonsense.c
