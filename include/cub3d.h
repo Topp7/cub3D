@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 15:31:34 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 15:46:56 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,25 @@
 
 /* ------------------------------ WINDOW SIZE ------------------------------- */
 
-# define WIDTH 256
-# define HEIGHT 256
+# define WIDTH 720
+# define HEIGHT 480
 # define PI 3.14159265359
 
 /* -------------------------------- STRUCTS --------------------------------- */
 
+typedef struct s_ray
+{
+	int		rlen;
+	int		rx;
+	int		ry;
+	float	ra;
+	float	xo;
+	float	yo;
+}	t_ray;
+
 typedef struct s_pos
 {
-	float	px; // von oben nach unten
+	float	px;
 	float	py;
 	float	pa;
 	float	pdx;
@@ -67,6 +77,8 @@ typedef struct s_data
 	unsigned int	f_rgb;
 	char			p_direction;
 	t_pos			*p_pos;
+	t_ray			*hr_pos;
+	t_ray			*vr_pos;
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*img;
 	mlx_image_t		*p_img;
@@ -132,10 +144,19 @@ int				parse_cub_file(char *cub_file, t_data *data);
 /* ------------------------------ RAYCASTING ------------------------------ */
 
 //	src/raycasting/raycasting.c
-void	raycast_exe(t_data *data);
+void			raycast_exe(t_data *data);
+void			update_rays(t_data *data);
 
 //	src/raycasting/test_functions.c
-void	add_testdata(t_data *data);
+void			add_testdata(t_data *data);
+void			draw_ray(t_data *data);
+void			draw_player(t_data *data);
+void			draw_map(t_data *data);
+void			draw_map_blocks(t_data *data, int x, int y, uint32_t color);
+
+//	src/raycasting/ray_calcs.c
+void			horizontal_rays(t_data *data);
+void			vertical_rays(t_data *data);
 
 //	main.c
 int		error_msg(char *str);
