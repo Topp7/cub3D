@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:55:01 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/09 16:32:14 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:36:15 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	error_checks(t_data *data)
 		return (error_msg("There is nonsense in RGB Values!"));
 	if (check_rgb(*data) == 2)
 		return (error_msg("RGB values are out of range!"));
+	// if (check_map_structure(*data))
+	// 	return (error_msg("We do not allow dead lines or blocks!"));
 	// if (check_map_surrounded(*data))
-	// 	return (error_msg("Map is not completely closed!"));
+	// 	return (error_msg("Map is not completely closed! (glitchsafe)"));
 	// if (check_map_characters(*data))
 	// 	return (error_msg("There is a wrong character in the map!"));
 	// if (check_start_pos(*data))
 	// 	return (error_msg("There is no starting position!"));
-	// if (check_map_structure(*data))
-	// 	return (error_msg("We do not alow dead lines or blocks!"));
 	return (0);
 }
