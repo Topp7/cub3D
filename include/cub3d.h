@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/09 15:46:56 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/09 16:37:27 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ typedef struct s_pos
 	float	pdy;
 }	t_pos;
 
+typedef struct s_temp
+{
+	int				i;
+	int				j;
+	int				k;
+	int				x;
+	int				y;
+	int				count;
+	int				*flag;
+	int				fd;
+	char			*line;
+	char			*str;
+}					t_temp;
+
 typedef struct s_data
 {
 	char			*temp;
@@ -100,16 +114,24 @@ void			str_after_n(char *str);
 void			*ft_realloc(void *ptr, size_t new_size, int i);
 
 // #############################################################################
-// ---------------------------- Project Files ----------------------------------
+// --------------------------------- SRC ---------------------------------------
 // #############################################################################
 
-/* ---------------------------  ERROR HANDLER  ---------------------------- */
+/* ---------------------------  ERROR HANDLER  ------------------------------ */
 
-//	src/error_handling/error_handler1.c
-int				error_check(t_data *data);
-int				check_for_directions(t_data *data);
-int				check_for_nonsense(t_data *data);
+//	src/error_handling/check_directions.c
+int				check_directions(t_data data);
 
+//	src/error_handling/check_nonsense.c
+int				check_nonsense(t_data data);
+int				check_nonsense_1(t_data data);
+int				check_nonsense_2(t_data data);
+
+//	src/error_handling/check_rgb.c
+int				check_rgb(t_data data);
+
+//	src/error_handling/error_checks.c
+int				error_checks(t_data *data);
 
 /* -------------------------------  HELPERS  -------------------------------- */
 
@@ -117,11 +139,12 @@ int				check_for_nonsense(t_data *data);
 void			print2d_array(char **array);
 void			print_values(t_data *data);
 unsigned int	extract_rgb(char *rgb);
+void			init_temp_struct(t_temp *temp);
 
 // src/helper/helper2.c
-int				count_relevant_chars(const char *str, const char *chrs_to_rmv);
-void			remove_helper(const char *str, const char *chrs_to_rmv, char *new_s);
-char			*remove_chars(const char *s, const char *chrs_to_rmv);
+int				count_relevant_chars(char *str, char *chrs_to_rmv);
+void			remove_helper(char *str, char *chrs_to_rmv, char *new_s);
+char			*remove_chars(char *s, char *chrs_to_rmv);
 
 /* ---------------------------  INITIALIZATION  ---------------------------- */
 
@@ -159,6 +182,6 @@ void			horizontal_rays(t_data *data);
 void			vertical_rays(t_data *data);
 
 //	main.c
-int		error_msg(char *str);
+int				error_msg(char *str);
 
 #endif

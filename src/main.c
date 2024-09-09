@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 15:37:26 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/09 16:36:42 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,11 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = NULL;
-	if (input_check(argc, argv))
-		return (1);
-	if (init_data(&data))
-		return (1);
-	if (parse_cub_file(argv[1], data))
-		return (1);
-	if (error_check(data))
-		return (1);
-	if (extract_cub_data(argv[1], data) == 1)
+	if (input_check(argc, argv)
+		|| init_data(&data)
+		|| parse_cub_file(argv[1], data)
+		|| error_checks(data)
+		|| extract_cub_data(argv[1], data))
 		return (1);
 	print_values(data);
 	raycast_exe(data);

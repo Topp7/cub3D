@@ -6,7 +6,7 @@
 #    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/09 15:39:32 by stopp            ###   ########.fr        #
+#    Updated: 2024/09/09 16:36:17 by stopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,11 @@ OBJ_DIR := obj
 # Source files
 SRCS    :=	gnl/get_next_line.c \
 			gnl/get_next_line_utils.c \
-			src/error_handler/error_handler1.c \
+			src/error_handler/check_directions.c \
+			src/error_handler/check_nonsense.c \
+			src/error_handler/check_order.c \
+			src/error_handler/check_rgb.c \
+			src/error_handler/error_checks.c \
 			src/main.c \
 			src/helper/helper1.c \
 			src/helper/helper2.c \
