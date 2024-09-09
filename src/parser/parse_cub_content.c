@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/09 16:40:30 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:43:15 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void	extract_player_data(t_data *data)
 				|| data->map[x][y] == 'S'
 				|| data->map[x][y] == 'W')
 			{
-				data->p_pos->px = x + 0.5;
-				data->p_pos->py = y + 0.5;
+				data->p_pos->px = (x + 0.5) * 30;
+				data->p_pos->py = (y + 0.5) * 30;
 				data->p_direction = data->map[x][y];
 				return ;
 			}

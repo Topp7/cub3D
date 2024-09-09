@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/09 15:17:21 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:43:25 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,30 @@
 
 /* ------------------------------ WINDOW SIZE ------------------------------- */
 
-# define WIDTH 256
-# define HEIGHT 256
+# define WIDTH 720
+# define HEIGHT 480
 # define PI 3.14159265359
 
 /* -------------------------------- STRUCTS --------------------------------- */
+
+typedef struct s_ray
+{
+	int		rlen;
+	int		rx;
+	int		ry;
+	float	ra;
+	float	xo;
+	float	yo;
+}	t_ray;
+
+typedef struct s_pos
+{
+	float	px;
+	float	py;
+	float	pa;
+	float	pdx;
+	float	pdy;
+}	t_pos;
 
 typedef struct s_temp
 {
@@ -55,15 +74,6 @@ typedef struct s_temp
 	char			*line;
 	char			*str;
 }					t_temp;
-
-typedef struct s_pos
-{
-	float			px;
-	float			py;
-	float			pa;
-	float			pdx;
-	float			pdy;
-}					t_pos;
 
 typedef struct s_data
 {
@@ -82,6 +92,8 @@ typedef struct s_data
 	char			p_direction;
 	int				map_x;
 	t_pos			*p_pos;
+	t_ray			*hr_pos;
+	t_ray			*vr_pos;
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*img;
 	mlx_image_t		*p_img;
@@ -158,9 +170,18 @@ int				parse_cub_file(char *cub_file, t_data *data);
 
 //	src/raycasting/raycasting.c
 void			raycast_exe(t_data *data);
+void			update_rays(t_data *data);
 
 //	src/raycasting/test_functions.c
 void			add_testdata(t_data *data);
+void			draw_ray(t_data *data);
+void			draw_player(t_data *data);
+void			draw_map(t_data *data);
+void			draw_map_blocks(t_data *data, int x, int y, uint32_t color);
+
+//	src/raycasting/ray_calcs.c
+void			horizontal_rays(t_data *data);
+void			vertical_rays(t_data *data);
 
 //	main.c
 int				error_msg(char *str);

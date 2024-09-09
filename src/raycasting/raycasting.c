@@ -6,13 +6,32 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/03 18:06:27 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/09 16:29:49 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_player(t_data *data);
+int	wall_collision(t_data *data, char c)
+{
+	int	mx;
+	int	my;
+
+	if (c == 'f')
+	{
+		mx = (int)(data->p_pos->px + data->p_pos->pdx * 5) / 30;
+		my = (int)(data->p_pos->py + data->p_pos->pdy * 5) / 30;
+	}
+	else
+	{
+		mx = (int)(data->p_pos->px - data->p_pos->pdx) / 30;
+		my = (int)(data->p_pos->py - data->p_pos->pdy) / 30;
+	}
+	if (data->map[mx][my] == '1')
+		return (1);
+	else
+		return (0);
+}
 
 void	control_keyhook(mlx_key_data_t keydata, void *param)
 {
@@ -24,14 +43,14 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_ESCAPE)
 			mlx_close_window(data->mlx_ptr);
 	}
-	if (keydata.key == MLX_KEY_UP)
+	if (keydata.key == MLX_KEY_UP && wall_collision(data, 'f') == 0)
 	{
 		mlx_delete_image(data->mlx_ptr, data->p_img);
-		data->p_pos->px += data->p_pos->pdx;
-		data->p_pos->py += data->p_pos->pdy;
+		data->p_pos->px += data->p_pos->pdx * 5;
+		data->p_pos->py += data->p_pos->pdy * 5;
 		draw_player(data);
 	}
-	if (keydata.key == MLX_KEY_DOWN)
+	if (keydata.key == MLX_KEY_DOWN && wall_collision(data, 'b') == 0)
 	{
 		mlx_delete_image(data->mlx_ptr, data->p_img);
 		data->p_pos->px -= data->p_pos->pdx;
@@ -44,120 +63,41 @@ void	control_keyhook(mlx_key_data_t keydata, void *param)
 		data->p_pos->pa -= 0.1;
 		if (data->p_pos->pa < 0)
 			data->p_pos->pa += (2 * PI);
-		data->p_pos->pdx = (float)(sin(data->p_pos->pa) / 10);
-		data->p_pos->pdy = (float)(cos(data->p_pos->pa) / 10);
+		data->p_pos->pdx = (float)(sin(data->p_pos->pa));
+		data->p_pos->pdy = (float)(cos(data->p_pos->pa));
 		draw_player(data);
-		printf("pa: %f\n", data->p_pos->pa);
 	}
 	if (keydata.key == MLX_KEY_RIGHT)
 	{
 		mlx_delete_image(data->mlx_ptr, data->p_img);
 		data->p_pos->pa += 0.1;
 		if (data->p_pos->pa > (2 * PI))
-			data->p_pos->pa = (data->p_pos->pa - (2 * PI));
-		data->p_pos->pdx = (float)(sin(data->p_pos->pa) / 10);
-		data->p_pos->pdy = (float)(cos(data->p_pos->pa) / 10);
+			data->p_pos->pa -= (2 * PI);
+		data->p_pos->pdx = (float)(sin(data->p_pos->pa));
+		data->p_pos->pdy = (float)(cos(data->p_pos->pa));
 		draw_player(data);
-		printf("pa: %f\n", data->p_pos->pa);
 	}
 }
 
-void	draw_map_blocks(t_data *data, int x, int y, uint32_t color)
+void	update_rays(t_data *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < 29 && ((x * 30) + i) < 2000)
-	{
-		j = 0;
-		while (j < 29 && ((y * 30) + j) < 2000)
-		{
-			mlx_put_pixel(data->img, ((y * 30) + j),
-				((x * 30) + i), color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_map(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (data->map[x])
-	{
-		y = 0;
-		while (data->map[x][y])
-		{
-			if (data->map[x][y] == '1')
-				draw_map_blocks(data, x, y, data->c_rgb);
-			else if (data->map[x][y] == '0' || data->map[x][y] == data->p_direction)
-				draw_map_blocks(data, x, y, data->f_rgb);
-			y++;
-		}
-		x++;
-	}
-	mlx_image_to_window(data->mlx_ptr, data->img, 0, 0);
-}
-
-void	draw_ray(t_data *data)
-{
-	float	x;
-	float	y;
-	int		i;
-
-	x = (data->p_pos->px * 30) + 5;
-	y = (data->p_pos->py * 30) + 5;
-	i = 0;
-	while (i < 30)
-	{
-		mlx_put_pixel(data->p_img, y, x, 0x000FF000 | 255);
-		x += (data->p_pos->pdx * 10);
-		y += (data->p_pos->pdy * 10);
-		i++;
-	}
-}
-
-void	draw_player(t_data *data)
-{
-	float	x;
-	float	y;
-	int		i;
-	int		j;
-
-	x = data->p_pos->px * 30;
-	y = data->p_pos->py * 30;
-	data->p_img = mlx_new_image(data->mlx_ptr, 2000, 1000);
-	if (!data->img)
-		return ;
-	i = 0;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			mlx_put_pixel(data->p_img, y + j, x + i, 0x00FF0000 | 255);
-			j++;
-		}
-		i++;
-	}
-	draw_ray(data);
-	mlx_image_to_window(data->mlx_ptr, data->p_img,
-		0, 0);
+	horizontal_rays(data);
+	vertical_rays(data);
+	if (data->vr_pos->rlen < data->hr_pos->rlen)
+		mlx_put_pixel(data->p_img, data->vr_pos->ry,
+			data->vr_pos->rx, 0xFFFFFF00 | 255);
+	else
+		mlx_put_pixel(data->p_img, data->hr_pos->ry,
+			data->hr_pos->rx, 0xFFFFFF00 | 255);
 }
 
 void	raycast_exe(t_data *data)
 {
 	add_testdata(data);
-	data->mlx_ptr = mlx_init(2000, 1000, "cub3d", true);
+	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	if (!data->mlx_ptr)
 		return ;
-	data->img = mlx_new_image(data->mlx_ptr, 2000, 1000);
+	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->img)
 		return ;
 	draw_map(data);

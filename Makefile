@@ -6,7 +6,7 @@
 #    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/09 16:37:59 by chorst           ###   ########.fr        #
+#    Updated: 2024/09/09 16:43:22 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS    :=	gnl/get_next_line.c \
 			src/parser/parse_cub_file.c \
 			src/raycasting/raycasting.c \
 			src/raycasting/test_functions.c \
+			src/raycasting/ray_calcs.c \
 
 # Object files
 OBJS    := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
