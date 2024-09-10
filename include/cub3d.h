@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/09 16:43:25 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/10 13:38:34 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,21 @@ void			*ft_realloc(void *ptr, size_t new_size, int i);
 int				regognize_direction(char *str);
 int				check_directions(t_data data);
 
+//	src/error_handling/check_map.c
+int				check_map_structure_lines(t_data data);
+int				check_map_surrounded_by_walls(t_data data);
+int				check_map_characters(t_data data);
+int				check_map_start_pos(t_data data);
+
+// src/error_handling/check_nonsense_helper.c
+int				check_nonsense_1helper(char *str);
+int				check_nonsense_2helper(char *str);
+
 //	src/error_handling/check_nonsense.c
 int				check_nonsense(t_data data);
 int				check_nonsense_1(t_data data);
 int				check_nonsense_2(t_data data);
+int				check_nonsense_3(t_data data);
 
 //	src/error_handling/check_rgb.c
 int				check_rgb(t_data data);
@@ -142,11 +153,16 @@ void			print2d_array(char **array);
 void			print_values(t_data *data);
 unsigned int	extract_rgb(char *rgb);
 void			init_temp_struct(t_temp *temp);
+int				is_surrounded_by_walls(char **map, int i, int j);
+
 
 // src/helper/helper2.c
 int				count_relevant_chars(char *str, char *chrs_to_rmv);
 void			remove_helper(char *str, char *chrs_to_rmv, char *new_s);
 char			*remove_chars(char *s, char *chrs_to_rmv);
+
+// src/helper/helper3.c
+int				ft_strpbrk(const char *str, const char *charset);
 
 /* ---------------------------  INITIALIZATION  ---------------------------- */
 

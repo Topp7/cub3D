@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/09 16:43:28 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:52:50 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 	if (extract_cub_data(argv[1], data))
 		return (1);
 	print_values(data);
-	raycast_exe(data);
+	// raycast_exe(data);
 	free(data->cub_cont);
 	return (0);
 }

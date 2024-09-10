@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/09 15:28:29 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/10 12:44:19 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,22 @@ void	init_temp_struct(t_temp *temp)
 	temp->fd = 0;
 	temp->line = NULL;
 	temp->str = NULL;
+}
+
+// Helper function to check if the map is surrounded by walls
+int	is_surrounded_by_walls(char **map, int i, int j)
+{
+	if (map[i][j - 1] == ' '
+		|| map[i][j + 1] == ' '
+		|| map[i][j + 1] == '\n'
+		|| map[i - 1][j] == ' '
+		|| map[i + 1][j] == ' '
+		|| map[i - 1][j - 1] == ' '
+		|| map[i - 1][j + 1] == ' '
+		|| map[i - 1][j + 1] == '\n'
+		|| map[i + 1][j - 1] == ' '
+		|| map[i + 1][j + 1] == ' '
+		|| map[i + 1][j + 1] == '\n')
+		return (1);
+	return (0);
 }
