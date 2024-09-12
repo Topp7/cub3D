@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:45 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/09 17:00:38 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/12 13:06:23 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ int	check_directions(t_data data)
 	while (data.cub_cont[t.i])
 	{
 		t.j = 0;
-		while (data.cub_cont[t.i][t.j] == '\n')
-			t.i++;
-		while (data.cub_cont[t.i][t.j] == ' ')
-			t.j++;
+		skip_empty_lines(data.cub_cont, &t.i, &t.j);
+		skip_spaces(data.cub_cont, &t.i, &t.j);
 		if (find_first_map_line(data.cub_cont[t.i] + t.j) == true)
 			return (free(t.flag), 2);
 		if (regognize_direction(data.cub_cont[t.i] + t.j) != 0)

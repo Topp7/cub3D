@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:30 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/10 13:37:31 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/12 14:29:02 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ int	check_nonsense_1(t_data data)
 	while (data.cub_cont[i])
 	{
 		j = 0;
-		while (data.cub_cont[i][j] == '\n' && data.cub_cont[i + 1])
-			i++;
-		while (data.cub_cont[i][j] == ' ')
-			j++;
+		skip_empty_lines(data.cub_cont, &i, &j);
+		skip_spaces(data.cub_cont, &i, &j);
 		if (count == 6)
+		{
+			if (find_first_map_line(data.cub_cont[i]) == false)
+				return (1);
 			return (0);
+		}
 		if (regognize_direction(data.cub_cont[i] + j) == 0)
 			return (1);
 		count++;
@@ -64,10 +66,8 @@ int	check_nonsense_2(t_data data)
 	while (data.cub_cont[i])
 	{
 		j = 0;
-		while (data.cub_cont[i][j] == '\n' && data.cub_cont[i + 1])
-			i++;
-		while (data.cub_cont[i][j] == ' ')
-			j++;
+		skip_empty_lines(data.cub_cont, &i, &j);
+		skip_spaces(data.cub_cont, &i, &j);
 		if (regognize_direction(data.cub_cont[i] + j) != 0)
 		{
 			if (check_nonsense_2helper(data.cub_cont[i] + j))

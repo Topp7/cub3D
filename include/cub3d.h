@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/10 13:38:34 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/12 14:50:56 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,13 @@ typedef struct s_data
 	char			**cub_cont;
 	char			**map;
 	char			*north;
+	mlx_texture_t	*north_tex;
 	char			*south;
+	mlx_texture_t	*south_tex;
 	char			*west;
+	mlx_texture_t	*west_tex;
 	char			*east;
+	mlx_texture_t	*east_tex;
 	char			*ceiling;
 	unsigned int	c_rgb;
 	char			*floor;
@@ -140,6 +144,9 @@ int				check_nonsense_1(t_data data);
 int				check_nonsense_2(t_data data);
 int				check_nonsense_3(t_data data);
 
+// src/error_handling/check_paths_validation.c
+int				check_paths(t_data *data);
+
 //	src/error_handling/check_rgb.c
 int				check_rgb(t_data data);
 
@@ -163,6 +170,9 @@ char			*remove_chars(char *s, char *chrs_to_rmv);
 
 // src/helper/helper3.c
 int				ft_strpbrk(const char *str, const char *charset);
+void			skip_empty_lines(char **cub_cont, int *i, int *j);
+void			skip_spaces(char **cub_cont, int *i, int *j);
+int				is_empty_line(char *line);
 
 /* ---------------------------  INITIALIZATION  ---------------------------- */
 

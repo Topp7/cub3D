@@ -6,7 +6,7 @@
 #    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/10 13:37:52 by chorst           ###   ########.fr        #
+#    Updated: 2024/09/12 14:30:57 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS    :=	gnl/get_next_line.c \
 			src/error_handler/check_map.c \
 			src/error_handler/check_nonsense.c \
 			src/error_handler/check_nonsense_helper.c \
+			src/error_handler/check_paths_validation.c \
 			src/error_handler/check_rgb.c \
 			src/error_handler/error_checks.c \
 			src/main.c \

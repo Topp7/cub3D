@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:55:01 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/10 13:41:47 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/12 14:48:04 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	error_checks(t_data *data)
 	if (check_map_structure_lines(*data))
 		return (error_msg("We do not allow empty lines int the map!"));
 	if (check_map_surrounded_by_walls(*data))
-		return (error_msg("Map is not completely closed! (glitchsafe)"));
+		return (error_msg("Map is not completely closed!"));
 	if (check_map_characters(*data))
 		return (error_msg("There is a wrong character in the map!"));
 	if (check_map_start_pos(*data))
 		return (error_msg("Missing or doubled starting position!"));
-	// if (path_validation(*data))
-	// 	return (error_msg("One of the Paths is not valid!"));
+	if (check_paths(data))
+		return (error_msg("One of the Paths is not valid!"));
 	return (0);
 }

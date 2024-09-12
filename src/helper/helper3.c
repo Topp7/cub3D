@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:41:25 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/10 09:44:43 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/12 13:53:41 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,32 @@ int	ft_strpbrk(const char *str, const char *charset)
 			c++;
 		}
 		str++;
+	}
+	return (1);
+}
+
+void	skip_empty_lines(char **cub_cont, int *i, int *j)
+{
+	while (cub_cont[*i][*j] == '\n' && cub_cont[*i + 1])
+		(*i)++;
+}
+
+void	skip_spaces(char **cub_cont, int *i, int *j)
+{
+	while (cub_cont[*i][*j] == ' ')
+		(*j)++;
+}
+
+int	is_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '\n' && line[i] != ' ')
+			return (0);
+		i++;
 	}
 	return (1);
 }
