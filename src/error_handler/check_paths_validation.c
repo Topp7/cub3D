@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:30:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/13 12:04:29 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/13 13:22:32 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	direction(char *str)
 void	path_validation(t_data *data)
 {
 	if (!data->north_tex)
-		free(data->north_tex);
+		error_msg("North texture path is not valid!");
 	if (!data->south_tex)
-		free(data->south_tex);
+		error_msg("South texture path is not valid!");
 	if (!data->west_tex)
-		free(data->west_tex);
+		error_msg("West texture path is not valid!");
 	if (!data->east_tex)
-		free(data->east_tex);
+		error_msg("East texture path is not valid!");
 }
 
 void	load_path_into_struct(t_data *data, char *path)
@@ -65,6 +65,7 @@ int	check_paths(t_data *data)
 		if (regognize_direction(data->cub_cont[i] + j) == 1)
 		{
 			path = remove_chars(data->cub_cont[i] + j, " \n");
+			load_path_into_struct(data, path);
 			free(path);
 			i++;
 		}
