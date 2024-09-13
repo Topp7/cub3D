@@ -6,7 +6,7 @@
 #    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/10 15:48:23 by stopp            ###   ########.fr        #
+#    Updated: 2024/09/13 11:47:37 by stopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,14 @@ SRCS    :=	gnl/get_next_line.c \
 			src/error_handler/check_directions.c \
 			src/error_handler/check_map.c \
 			src/error_handler/check_nonsense.c \
+			src/error_handler/check_nonsense_helper.c \
+			src/error_handler/check_paths_validation.c \
 			src/error_handler/check_rgb.c \
 			src/error_handler/error_checks.c \
 			src/main.c \
 			src/helper/helper1.c \
 			src/helper/helper2.c \
+			src/helper/helper3.c \
 			src/initialization/init_data.c \
 			src/parser/parse_cub_content.c \
 			src/parser/parse_cub_file.c \
