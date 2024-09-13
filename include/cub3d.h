@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/12 14:50:56 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/13 11:48:07 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,10 @@ int				parse_cub_file(char *cub_file, t_data *data);
 //	src/raycasting/raycasting.c
 void			raycast_exe(t_data *data);
 void			update_rays(t_data *data);
+
+//	src/raycasting/raycasting.c
+void			move_player(mlx_key_data_t keydata, t_data *data);
+void			turn_player(mlx_key_data_t keydata, t_data *data);
 
 //	src/raycasting/test_functions.c
 void			add_testdata(t_data *data);
