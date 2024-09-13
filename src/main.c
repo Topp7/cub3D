@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/13 11:46:38 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/13 11:54:59 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,6 @@ int	main(int argc, char **argv)
 
 // Wenn dich die Error Message von MLX nervt, kannst du
 // die Zeile 35 + 36 in src/error_handler/error_checks.c auskommentieren.
+
+
+// ../../textures/no_texture.png

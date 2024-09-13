@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:30:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/12 15:18:41 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/13 12:04:29 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	check_paths(t_data *data)
 		if (regognize_direction(data->cub_cont[i] + j) == 1)
 		{
 			path = remove_chars(data->cub_cont[i] + j, " \n");
-			load_path_into_struct(data, path);
 			free(path);
 			i++;
 		}

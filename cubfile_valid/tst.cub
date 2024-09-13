@@ -7,7 +7,7 @@ NO ./path_to_the_north_texture
 
 F        2,100,0
 
-       WE             ./path_to_the_west_texture
+       WE             ./../../textures/no_texture.png
 
 EA ./path_to_the_east_texture
 
