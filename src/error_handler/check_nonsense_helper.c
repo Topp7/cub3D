@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_nonsense_helper.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:36:41 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/10 13:37:23 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/13 12:25:34 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_nonsense_1helper(char *str)
 		i++;
 	while (str[i] == ' ')
 		i++;
-	if ((str[i] <= '0' || str[i] > '9')
+	if ((str[i] < '0' || str[i] > '9')
 		&& (str[i] != '.' || str[i + 1] != '/'))
 		return (1);
 	return (0);

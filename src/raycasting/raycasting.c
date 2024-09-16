@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/13 12:08:04 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/16 15:03:21 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,14 @@ void	raycast_exe(t_data *data)
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	if (!data->mlx_ptr)
 		return ;
-	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->img = mlx_new_image(data->mlx_ptr, 2000, 2000);
 	if (!data->img)
 		return ;
+	if (data->west_tex != NULL)
+		data->img = mlx_texture_to_image(data->mlx_ptr, data->west_tex);
+	else
+		printf("failed to load\n");
+	mlx_image_to_window(data->mlx_ptr, data->img, 0, 0);
 	draw_map(data);
 	draw_player(data);
 	mlx_key_hook(data->mlx_ptr, control_keyhook, data);
