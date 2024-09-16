@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/13 11:48:07 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/13 11:48:21 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ void			print_values(t_data *data);
 unsigned int	extract_rgb(char *rgb);
 void			init_temp_struct(t_temp *temp);
 int				is_surrounded_by_walls(char **map, int i, int j);
-
 
 // src/helper/helper2.c
 int				count_relevant_chars(char *str, char *chrs_to_rmv);

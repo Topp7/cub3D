@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/13 13:03:23 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/16 15:06:03 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 	if (extract_cub_data(argv[1], data))
 		return (1);
 	// print_values(data);
-	// raycast_exe(data);
+	raycast_exe(data);
 	free(data->cub_cont);
 	return (0);
 }
@@ -76,3 +76,4 @@ int	main(int argc, char **argv)
 
 
 // ../../textures/no_texture.png
+// -fsanitize=address
