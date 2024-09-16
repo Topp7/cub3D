@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_paths_validation.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:30:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/13 13:22:32 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/16 15:11:50 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	direction(char *str)
 void	path_validation(t_data *data)
 {
 	if (!data->north_tex)
-		error_msg("North texture path is not valid!");
-	if (!data->south_tex)
-		error_msg("South texture path is not valid!");
-	if (!data->west_tex)
-		error_msg("West texture path is not valid!");
-	if (!data->east_tex)
-		error_msg("East texture path is not valid!");
+		return ;
+	else if (!data->south_tex)
+		return ;
+	else if (!data->west_tex)
+		return ;
+	else if (!data->east_tex)
+		return ;
 }
 
 void	load_path_into_struct(t_data *data, char *path)

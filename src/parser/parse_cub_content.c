@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/09 16:43:15 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/16 16:53:45 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char	**extract_map(char *argv, t_data *data)
 		i++;
 	if (!data->cub_cont[i] || !data->cub_cont[i + 1])
 		return (NULL);
-	map = malloc(sizeof(char *) * (file_line_count(fd) - i + 1));
+	data->map_x = file_line_count(fd) - i;
+	map = malloc(sizeof(char *) * (data->map_x + 1));
 	if (!map)
 		return (close(fd), NULL);
 	close(fd);
