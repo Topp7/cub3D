@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:30 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/12 14:29:02 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/13 12:23:38 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	check_nonsense_1(t_data data)
 		if (regognize_direction(data.cub_cont[i] + j) == 0)
 			return (1);
 		count++;
+		// printf("Line %d: %s\n", i, data.cub_cont[i]);
 		if (check_nonsense_1helper(data.cub_cont[i] + j))
 			return (1);
 		i++;
