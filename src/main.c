@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/16 15:06:03 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/17 11:15:20 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ int	save_input(t_data *data)
 	return (1);
 }
 
+void	start_window(t_data *data)
+{
+	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
+	if (!data->mlx_ptr)
+		exit(1);
+	data->north_img = mlx_texture_to_image(data->mlx_ptr, data->north_tex);
+	data->img = mlx_new_image(data->mlx_ptr, 2000, 2000);
+	if (!data->img)
+		return ;
+	mlx_loop(data->mlx_ptr);
+	mlx_terminate(data->mlx_ptr);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -65,15 +78,11 @@ int	main(int argc, char **argv)
 		return (1);
 	if (extract_cub_data(argv[1], data))
 		return (1);
-	// print_values(data);
+	// start_window(data);
 	raycast_exe(data);
 	free(data->cub_cont);
 	return (0);
 }
 
-// Wenn dich die Error Message von MLX nervt, kannst du
-// die Zeile 35 + 36 in src/error_handler/error_checks.c auskommentieren.
-
-
-// ../../textures/no_texture.png
-// -fsanitize=address
+// -fsanitize=address vor der Eval entfernen aus der Makefile
+// cub3d.dSYM vor der Eval entfernen

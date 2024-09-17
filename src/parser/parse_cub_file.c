@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:35:42 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/09 12:31:29 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/16 16:32:49 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	parse_cub_file(char *cub_file, t_data *data)
 	i = 0;
 	fd = open(cub_file, O_RDONLY);
 	if (fd == -1)
-		return (1);
+		return (error_msg("File can not be opened"));
 	data->cub_cont = malloc(sizeof(char *) * (file_line_count(fd) + 1));
 	if (data->cub_cont == NULL)
 		return (close(fd), 1);

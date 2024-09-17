@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/13 11:48:21 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/16 16:43:56 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,16 @@ typedef struct s_data
 	char			**map;
 	char			*north;
 	mlx_texture_t	*north_tex;
+	mlx_image_t		*north_img;
 	char			*south;
 	mlx_texture_t	*south_tex;
+	mlx_image_t		*south_img;
 	char			*west;
 	mlx_texture_t	*west_tex;
+	mlx_image_t		*west_img;
 	char			*east;
 	mlx_texture_t	*east_tex;
+	mlx_image_t		*east_img;
 	char			*ceiling;
 	unsigned int	c_rgb;
 	char			*floor;
@@ -98,6 +102,7 @@ typedef struct s_data
 	t_pos			*p_pos;
 	t_ray			*hr_pos;
 	t_ray			*vr_pos;
+	mlx_t			*mlx_ptr2;
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*img;
 	mlx_image_t		*p_img;

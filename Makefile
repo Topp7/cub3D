@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
+#    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/13 12:24:29 by stopp            ###   ########.fr        #
+#    Updated: 2024/09/16 16:41:49 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ BLUE := \033[0;34m
 NC := \033[0m
 
 # Flags
-CFLAGS  := -Wall -Werror -Wextra -g3 -I.
+CFLAGS  := -Wall -Werror -Wextra -fsanitize=address -g3 -I.
 
 LIBS := ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 
