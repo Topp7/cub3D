@@ -6,7 +6,7 @@
 #    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/13 12:24:29 by stopp            ###   ########.fr        #
+#    Updated: 2024/09/19 18:00:51 by stopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRCS    :=	gnl/get_next_line.c \
 			src/raycasting/test_functions.c \
 			src/raycasting/ray_calcs.c \
 			src/raycasting/movement.c \
+			src/raycasting/draw_minimap.c \
+			src/raycasting/textures.c \
 
 # Object files
 OBJS    := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

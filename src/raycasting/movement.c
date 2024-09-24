@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:44:47 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/10 16:26:31 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/24 19:19:26 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	wall_col_lr(int *mx, int *my, t_data *data, char c)
 		data->p_pos->pa -= 0.5 * PI;
 		if (data->p_pos->pa < 0)
 			data->p_pos->pa += (2 * PI);
-		*mx = (int)(data->p_pos->px + (sin(data->p_pos->pa) * 2)) / 30;
-		*my = (int)(data->p_pos->py + (cos(data->p_pos->pa) * 2)) / 30;
+		*mx = (int)(data->p_pos->px + (sin(data->p_pos->pa))) / TILE;
+		*my = (int)(data->p_pos->py + (cos(data->p_pos->pa))) / TILE;
 		data->p_pos->pa += 0.5 * PI;
 		if (data->p_pos->pa > (2 * PI))
 			data->p_pos->pa -= (2 * PI);
@@ -30,8 +30,8 @@ void	wall_col_lr(int *mx, int *my, t_data *data, char c)
 		data->p_pos->pa += 0.5 * PI;
 		if (data->p_pos->pa > (2 * PI))
 			data->p_pos->pa -= (2 * PI);
-		*mx = (int)(data->p_pos->px + (sin(data->p_pos->pa) * 2)) / 30;
-		*my = (int)(data->p_pos->py + (cos(data->p_pos->pa) * 2)) / 30;
+		*mx = (int)(data->p_pos->px + (sin(data->p_pos->pa))) / TILE;
+		*my = (int)(data->p_pos->py + (cos(data->p_pos->pa))) / TILE;
 		data->p_pos->pa -= 0.5 * PI;
 		if (data->p_pos->pa < 0)
 			data->p_pos->pa += (2 * PI);
@@ -45,13 +45,13 @@ int	wall_collision(t_data *data, char c)
 
 	if (c == 'f')
 	{
-		mx = (int)(data->p_pos->px + data->p_pos->pdx * 5) / 30;
-		my = (int)(data->p_pos->py + data->p_pos->pdy * 5) / 30;
+		mx = (int)(data->p_pos->px + data->p_pos->pdx) / TILE;
+		my = (int)(data->p_pos->py + data->p_pos->pdy) / TILE;
 	}
 	else if (c == 'b')
 	{
-		mx = (int)(data->p_pos->px - data->p_pos->pdx) / 30;
-		my = (int)(data->p_pos->py - data->p_pos->pdy) / 30;
+		mx = (int)(data->p_pos->px - data->p_pos->pdx) / TILE;
+		my = (int)(data->p_pos->py - data->p_pos->pdy) / TILE;
 	}
 	else if (c == 'l' || c == 'r')
 		wall_col_lr(&mx, &my, data, c);
@@ -63,9 +63,9 @@ int	wall_collision(t_data *data, char c)
 		return (0);
 }
 
-void	turn_player(mlx_key_data_t keydata, t_data *data)
+void	turn_player( t_data *data)
 {
-	if (keydata.key == MLX_KEY_LEFT)
+	if (data->rotate == -1)
 	{
 		data->p_pos->pa -= 0.1;
 		if (data->p_pos->pa < 0)
@@ -73,53 +73,53 @@ void	turn_player(mlx_key_data_t keydata, t_data *data)
 		data->p_pos->pdx = (float)(sin(data->p_pos->pa));
 		data->p_pos->pdy = (float)(cos(data->p_pos->pa));
 	}
-	if (keydata.key == MLX_KEY_RIGHT)
+	if (data->rotate == 1)
 	{
 		data->p_pos->pa += 0.1;
 		if (data->p_pos->pa > (2 * PI))
 			data->p_pos->pa -= (2 * PI);
-		data->p_pos->pdx = (float)(sin(data->p_pos->pa));
-		data->p_pos->pdy = (float)(cos(data->p_pos->pa));
+		data->p_pos->pdx = (sin(data->p_pos->pa));
+		data->p_pos->pdy = (cos(data->p_pos->pa));
 	}
 }
 
-void	move_left_right(mlx_key_data_t keydata, t_data *data)
+void	move_left_right(t_data *data)
 {
-	if (keydata.key == MLX_KEY_A && wall_collision(data, 'r') == 0)
+	if (data->left_right == -1 && wall_collision(data, 'r') == 0)
 	{
 		data->p_pos->pa -= 0.5 * PI;
 		if (data->p_pos->pa < 0)
 			data->p_pos->pa += (2 * PI);
-		data->p_pos->px += (float)(sin(data->p_pos->pa) * 2);
-		data->p_pos->py += (float)(cos(data->p_pos->pa) * 2);
+		data->p_pos->px += (float)(sin(data->p_pos->pa));
+		data->p_pos->py += (float)(cos(data->p_pos->pa));
 		data->p_pos->pa += 0.5 * PI;
 		if (data->p_pos->pa > (2 * PI))
 			data->p_pos->pa -= (2 * PI);
 	}
-	if (keydata.key == MLX_KEY_D && wall_collision(data, 'l') == 0)
+	if (data->left_right == 1 && wall_collision(data, 'l') == 0)
 	{
 		data->p_pos->pa += 0.5 * PI;
 		if (data->p_pos->pa > (2 * PI))
 			data->p_pos->pa -= (2 * PI);
-		data->p_pos->px += (float)(sin(data->p_pos->pa) * 2);
-		data->p_pos->py += (float)(cos(data->p_pos->pa) * 2);
+		data->p_pos->px += (float)(sin(data->p_pos->pa));
+		data->p_pos->py += (float)(cos(data->p_pos->pa));
 		data->p_pos->pa -= 0.5 * PI;
 		if (data->p_pos->pa < 0)
 			data->p_pos->pa += (2 * PI);
 	}
 }
 
-void	move_player(mlx_key_data_t keydata, t_data *data)
+void	move_player(t_data *data)
 {
-	if (keydata.key == MLX_KEY_W && wall_collision(data, 'f') == 0)
+	if (data->up_down == 1 && wall_collision(data, 'f') == 0)
 	{
-		data->p_pos->px += data->p_pos->pdx * 5;
-		data->p_pos->py += data->p_pos->pdy * 5;
+		data->p_pos->px += data->p_pos->pdx ;
+		data->p_pos->py += data->p_pos->pdy ;
 	}
-	if (keydata.key == MLX_KEY_S && wall_collision(data, 'b') == 0)
+	else if (data->up_down == -1 && wall_collision(data, 'b') == 0)
 	{
 		data->p_pos->px -= data->p_pos->pdx;
 		data->p_pos->py -= data->p_pos->pdy;
 	}
-	move_left_right(keydata, data);
+	move_left_right(data);
 }
