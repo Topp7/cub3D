@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/16 16:43:56 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/17 11:16:10 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@
 
 typedef struct s_ray
 {
-	int		rlen;
-	int		rx;
-	int		ry;
+	float	rlen;
+	float	rx;
+	float	ry;
 	float	ra;
 	float	xo;
 	float	yo;
@@ -106,6 +106,7 @@ typedef struct s_data
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*img;
 	mlx_image_t		*p_img;
+	mlx_image_t		*b_img;
 }					t_data;
 
 // #############################################################################
@@ -205,6 +206,7 @@ void			update_rays(t_data *data);
 //	src/raycasting/raycasting.c
 void			move_player(mlx_key_data_t keydata, t_data *data);
 void			turn_player(mlx_key_data_t keydata, t_data *data);
+float			adjust_angle(float angle);
 
 //	src/raycasting/test_functions.c
 void			add_testdata(t_data *data);
