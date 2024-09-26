@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/24 19:24:08 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/26 13:06:08 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,23 @@ void	draw_wall_line(t_data *data, int j)
 	float	line;
 	int		tex_y;
 	float	x_step;
-	int		offset;
+	float	offset;
 	int		i;
 
-	line = calc_line_length(data);
 	tex_y = get_tex_y(data);
+	line = calc_line_length(data);
 	x_step = (TILE / line);
 	offset = 0;
 	if (line > HEIGHT)
 	{
-		while (x_step * offset < ((line - HEIGHT) / 2))
-			offset++;
+		offset = ((line - HEIGHT) / 2) * x_step;
 		line = HEIGHT;
 	}
 	i = 0;
 	while (i < line)
 	{
 		mlx_put_pixel(data->w_img, j, (HEIGHT / 2) - (line / 2) + i,
-			get_tex_color(find_texture(data), x_step * (i + offset), tex_y));
+			get_tex_color(find_texture(data), (int)(x_step * i + offset), tex_y));
 		i++;
 	}
 }
@@ -101,8 +100,8 @@ void	control_keyhook(void *param)
 	move_player(data);
 	turn_player(data);
 	draw_3d(data);
-	mlx_image_to_window(data->mlx_ptr, data->w_img, 0, 0);
 	draw_map(data);
+	mlx_image_to_window(data->mlx_ptr, data->w_img, 0, 0);
 }
 
 void	update_rays(t_data *data)
@@ -156,8 +155,6 @@ void	raycast_exe(t_data *data)
 	if (!data->mlx_ptr)
 		return ;
 	draw_fnc(data);
-	draw_map(data);
-	draw_3d(data);
 	mlx_loop_hook(data->mlx_ptr, control_keyhook, data);
 	mlx_key_hook(data->mlx_ptr, keyhandle, data);
 	mlx_loop(data->mlx_ptr);

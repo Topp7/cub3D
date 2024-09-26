@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/24 19:10:45 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/26 12:58:08 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ int				draw_map(t_data *data);
 void			draw_fnc(t_data *data);
 
 //	src/raycasting/ray_calcs.c
-unsigned int	get_tex_color(mlx_texture_t	*texture, float x, int y);
+unsigned int	get_tex_color(mlx_texture_t	*texture, int x, int y);
 int				get_tex_y(t_data *data);
 mlx_texture_t	*find_texture(t_data *data);
 
