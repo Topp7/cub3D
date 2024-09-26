@@ -6,18 +6,17 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/17 11:16:19 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/25 11:27:45 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_wall_line(t_data *data, int j)
+float	calc_line_length(t_data *data)
 {
 	float	line_h;
 	float	dist;
 	float	offset;
-	int		i;
 
 	if (data->vr_pos->rlen > data->hr_pos->rlen)
 		dist = data->hr_pos->rlen;
@@ -26,14 +25,33 @@ void	draw_wall_line(t_data *data, int j)
 	offset = (data->p_pos->pa - data->vr_pos->ra);
 	offset = adjust_angle(offset);
 	dist = dist * cos(offset);
-	line_h = (30 * HEIGHT) / dist;
-	if (line_h > HEIGHT)
-		line_h = HEIGHT;
-	i = 0;
-	while (i < line_h)
+	line_h = (TILE * HEIGHT) / dist;
+	return (line_h);
+}
+
+void	draw_wall_line(t_data *data, int j)
+{
+	float	line;
+	int		tex_y;
+	float	x_step;
+	int		offset;
+	int		i;
+
+	line = calc_line_length(data);
+	tex_y = get_tex_y(data);
+	x_step = (TILE / line);
+	offset = 0;
+	if (line > HEIGHT)
 	{
-		mlx_put_pixel(data->p_img, j, (HEIGHT / 2) - (line_h / 2) + i,
-			0x00FF0000 | 255);
+		while (x_step * offset < ((line - HEIGHT) / 2))
+			offset++;
+		line = HEIGHT;
+	}
+	i = 0;
+	while (i < line)
+	{
+		mlx_put_pixel(data->w_img, j, (HEIGHT / 2) - (line / 2) + i,
+			get_tex_color(find_texture(data), x_step * (i + offset), tex_y));
 		i++;
 	}
 }
@@ -53,9 +71,12 @@ void	draw_3d(t_data *data)
 	float	sixty_degree;
 	float	degree_change;
 
-	j = -360;
+	j = -384;
 	sixty_degree = ((2 * PI) / 360) * 60;
-	while (j <= 360)
+	data->w_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	if (!data->w_img)
+		return ;
+	while (j <= 383)
 	{
 		if (j != 0)
 			degree_change = (sixty_degree / 720) * j;
@@ -66,60 +87,66 @@ void	draw_3d(t_data *data)
 		data->hr_pos->ra = adjust_angle(data->hr_pos->ra);
 		data->vr_pos->ra = adjust_angle(data->vr_pos->ra);
 		update_rays(data);
-		draw_wall_line(data, j + 360);
+		draw_wall_line(data, j + 384);
 		j++;
 	}
 }
 
-void	control_keyhook(mlx_key_data_t keydata, void *param)
+void	control_keyhook(void *param)
 {
 	t_data	*data;
 
 	data = param;
-	if (keydata.key == MLX_KEY_ESCAPE)
-		mlx_close_window(data->mlx_ptr);
-	move_player(keydata, data);
-	turn_player(keydata, data);
-	mlx_delete_image(data->mlx_ptr, data->p_img);
-	draw_player(data);
+	mlx_delete_image(data->mlx_ptr, data->w_img);
+	move_player(data);
+	turn_player(data);
 	draw_3d(data);
+	mlx_image_to_window(data->mlx_ptr, data->w_img, 0, 0);
+	draw_map(data);
 }
 
 void	update_rays(t_data *data)
 {
 	horizontal_rays(data);
 	vertical_rays(data);
-	if (data->vr_pos->rlen < data->hr_pos->rlen)
-		mlx_put_pixel(data->p_img, data->vr_pos->ry,
-			data->vr_pos->rx, 0xFFFFFF00 | 255);
-	else
-		mlx_put_pixel(data->p_img, data->hr_pos->ry,
-			data->hr_pos->rx, 0xFFFFFF00 | 255);
 }
 
-void	draw_fnc(t_data *data)
+void	release(mlx_key_data_t keydata, t_data *data)
 {
-	int	i;
-	int	j;
+	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_RELEASE))
+		data->left_right = 0;
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_RELEASE))
+		data->left_right = 0;
+	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_RELEASE))
+		data->up_down = 0;
+	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_RELEASE))
+		data->up_down = 0;
+	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
+		data->rotate = 0;
+	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
+		data->rotate = 0;
+}
 
-	i = 0;
-	data->b_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	if (!data->b_img)
-		return ;
-	while (i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			if (i < HEIGHT / 2)
-				mlx_put_pixel(data->b_img, j, i, data->c_rgb);
-			else
-				mlx_put_pixel(data->b_img, j, i, data->f_rgb);
-			j++;
-		}
-		i++;
-	}
-	mlx_image_to_window(data->mlx_ptr, data->b_img, 0, 0);
+void	keyhandle(mlx_key_data_t keydata, void *param)
+{
+	t_data	*data;
+
+	data = param;
+	if (keydata.key == MLX_KEY_ESCAPE)
+		mlx_close_window(data->mlx_ptr);
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
+		data->left_right = -1;
+	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))
+		data->left_right = 1;
+	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS))
+		data->up_down = -1;
+	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		data->up_down = 1;
+	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		data->rotate = -1;
+	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		data->rotate = 1;
+	release(keydata, data);
 }
 
 void	raycast_exe(t_data *data)
@@ -128,13 +155,11 @@ void	raycast_exe(t_data *data)
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	if (!data->mlx_ptr)
 		return ;
-	data->img = mlx_new_image(data->mlx_ptr, 2000, 2000);
-	if (!data->img)
-		return ;
 	draw_fnc(data);
 	draw_map(data);
-	draw_player(data);
-	mlx_key_hook(data->mlx_ptr, control_keyhook, data);
+	draw_3d(data);
+	mlx_loop_hook(data->mlx_ptr, control_keyhook, data);
+	mlx_key_hook(data->mlx_ptr, keyhandle, data);
 	mlx_loop(data->mlx_ptr);
 	mlx_terminate(data->mlx_ptr);
 }

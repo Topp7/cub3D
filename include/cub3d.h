@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/17 11:16:10 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/25 11:06:14 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@
 
 /* ------------------------------ WINDOW SIZE ------------------------------- */
 
-# define WIDTH 720
+# define WIDTH 768
 # define HEIGHT 480
+# define TILE 32
 # define PI 3.14159265359
 
 /* -------------------------------- STRUCTS --------------------------------- */
@@ -99,13 +100,16 @@ typedef struct s_data
 	unsigned int	f_rgb;
 	char			p_direction;
 	int				map_x;
+	int				left_right;
+	int				up_down;
+	int				rotate;
 	t_pos			*p_pos;
 	t_ray			*hr_pos;
 	t_ray			*vr_pos;
 	mlx_t			*mlx_ptr2;
 	mlx_t			*mlx_ptr;
-	mlx_image_t		*img;
-	mlx_image_t		*p_img;
+	mlx_image_t		*m_img;
+	mlx_image_t		*w_img;
 	mlx_image_t		*b_img;
 }					t_data;
 
@@ -204,20 +208,26 @@ void			raycast_exe(t_data *data);
 void			update_rays(t_data *data);
 
 //	src/raycasting/raycasting.c
-void			move_player(mlx_key_data_t keydata, t_data *data);
-void			turn_player(mlx_key_data_t keydata, t_data *data);
+void			move_player(t_data *data);
+void			turn_player(t_data *data);
 float			adjust_angle(float angle);
 
 //	src/raycasting/test_functions.c
 void			add_testdata(t_data *data);
-void			draw_ray(t_data *data);
-void			draw_player(t_data *data);
-void			draw_map(t_data *data);
-void			draw_map_blocks(t_data *data, int x, int y, uint32_t color);
 
 //	src/raycasting/ray_calcs.c
 void			horizontal_rays(t_data *data);
+int				wall_hit(float mx, float my, t_data *data);
 void			vertical_rays(t_data *data);
+
+//	src/raycasting/ray_calcs.c
+int				draw_map(t_data *data);
+void			draw_fnc(t_data *data);
+
+//	src/raycasting/ray_calcs.c
+unsigned int	get_tex_color(mlx_texture_t	*texture, float x, int y);
+int				get_tex_y(t_data *data);
+mlx_texture_t	*find_texture(t_data *data);
 
 //	main.c
 int				error_msg(char *str);
