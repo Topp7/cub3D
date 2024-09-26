@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 13:06:08 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/26 13:58:16 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	control_keyhook(void *param)
 	draw_3d(data);
 	draw_map(data);
 	mlx_image_to_window(data->mlx_ptr, data->w_img, 0, 0);
+	printf("px: %f\npy: %f\n", data->p_pos->px, data->p_pos->py);
 }
 
 void	update_rays(t_data *data)

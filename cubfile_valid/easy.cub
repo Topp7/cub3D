@@ -1,8 +1,13 @@
-NO ./textures/no_texture.png
-SO ./textures/so_texture.png
-WE ./textures/we_texture.png
-EA ./textures/ea_texture.png
+NO ./textures/NO_texture.png
+
+SO ./textures/SO_texture.png
+
+WE ./textures/WE_texture.png
+
+EA ./textures/EA_texture.png
+
 C 0,100,200
+
 F 255, 120, 203
 
 

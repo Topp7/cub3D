@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:30:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/16 15:11:50 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/26 13:52:41 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	check_paths(t_data *data)
 			path = remove_chars(data->cub_cont[i] + j, " \n");
 			load_path_into_struct(data, path);
 			free(path);
-			i++;
 		}
 		i++;
 	}
