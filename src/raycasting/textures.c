@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:38:56 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/25 11:44:34 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/26 13:21:00 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ mlx_texture_t	*find_texture(t_data *data)
 	}
 }
 
-unsigned int	get_tex_color(mlx_texture_t	*texture, float x, int y)
+unsigned int	get_tex_color(mlx_texture_t	*texture, int x, int y)
 {
 	int				i;
 
-	i = ((int)x * TILE + (int)y) * 4;
+	i = (x * TILE + y) * 4;
 	return (get_rgba(texture->pixels[i], texture->pixels[i + 1],
 			texture->pixels[i + 2], texture->pixels[i + 3]));
 }

@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:30:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/17 11:16:17 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/26 13:54:11 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	check_paths(t_data *data)
 			path = remove_chars(data->cub_cont[i] + j, " \n");
 			load_path_into_struct(data, path);
 			free(path);
-			i++;
 		}
 		i++;
 	}
