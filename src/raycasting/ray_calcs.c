@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:30:37 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/25 11:14:32 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:37:11 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	wall_hit(float mx, float my, t_data *data)
 	ymap = floor(my / TILE);
 	if (xmap < 0 || ymap < 0)
 		return (0);
-	if (xmap > data->map_x || ymap > (int)ft_strlen(data->map[data->map_x]))
+	if (xmap > data->map_x || ymap > (int)ft_strlen(data->map[xmap]))
 		return (0);
 	if (data->map[xmap][ymap] == '1')
 		return (0);

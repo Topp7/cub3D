@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/18 17:07:30 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/26 16:25:49 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,7 @@ void	extract_paths_and_rgbs(t_data *data)
 		y = 0;
 		while (data->cub_cont[x][y] == ' ')
 			y++;
-		if (data->cub_cont[x][y] == 'N' && data->cub_cont[x][y + 1] == 'O')
-			data->north = remove_chars(&data->cub_cont[x][2 + y], " \n");
-		else if (data->cub_cont[x][y] == 'S' && data->cub_cont[x][y + 1] == 'O')
-			data->south = remove_chars(&data->cub_cont[x][2 + y], " \n");
-		else if (data->cub_cont[x][y] == 'W' && data->cub_cont[x][y + 1] == 'E')
-			data->west = remove_chars(&data->cub_cont[x][2 + y], " \n");
-		else if (data->cub_cont[x][y] == 'E' && data->cub_cont[x][y + 1] == 'A')
-			data->east = remove_chars(&data->cub_cont[x][2 + y], " \n");
-		else if (data->cub_cont[x][y] == 'C' && data->cub_cont[x][y + 1] == ' ')
+		if (data->cub_cont[x][y] == 'C' && data->cub_cont[x][y + 1] == ' ')
 			data->ceiling = remove_chars(&data->cub_cont[x][1 + y], " \n");
 		else if (data->cub_cont[x][y] == 'F' && data->cub_cont[x][y + 1] == ' ')
 			data->floor = remove_chars(&data->cub_cont[x][1 + y], " \n");
@@ -108,8 +100,8 @@ void	extract_player_data(t_data *data)
 				|| data->map[x][y] == 'S'
 				|| data->map[x][y] == 'W')
 			{
-				data->p_pos->px = (x + 0.5) * TILE;
-				data->p_pos->py = (y + 0.5) * TILE;
+				data->p_pos->px = (x + 0.5) * TILE + 0.001;
+				data->p_pos->py = (y + 0.5) * TILE + 0.001;
 				data->p_direction = data->map[x][y];
 				return ;
 			}
@@ -126,8 +118,7 @@ int	extract_cub_data(char *argv, t_data *data)
 	if (data->map == NULL)
 		return (error_msg("Map extraction failed"));
 	extract_paths_and_rgbs(data);
-	if (data->north == NULL || data->south == NULL || data->west == NULL
-		|| data->east == NULL || data->ceiling == NULL || data->floor == NULL)
+	if (data->ceiling == NULL || data->floor == NULL)
 		return (error_msg("Path or RGB extraction failed"));
 	extract_player_data(data);
 	return (0);

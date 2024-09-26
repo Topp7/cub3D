@@ -6,11 +6,21 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:59 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/09 15:47:09 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/26 16:36:27 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	free_rgb(char **rgb)
+{
+	int	i;
+
+	i = 0;
+	while (rgb[i])
+		free(rgb[i++]);
+	free(rgb);
+}
 
 int	check_rgb_helper(char *str)
 {
@@ -36,6 +46,7 @@ int	check_rgb_helper(char *str)
 			return (free(rgb), 2);
 		i++;
 	}
+	free_rgb(rgb);
 	return (0);
 }
 

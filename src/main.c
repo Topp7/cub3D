@@ -6,11 +6,35 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 13:52:46 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/26 16:52:40 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	free_datas(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->cub_cont[i])
+		free(data->cub_cont[i++]);
+	i = 0;
+	while (data->map[i])
+		free(data->map[i++]);
+	free(data->map);
+	free(data->cub_cont);
+	free(data->p_pos);
+	free(data->hr_pos);
+	free(data->vr_pos);
+	mlx_delete_texture(data->north_tex);
+	mlx_delete_texture(data->south_tex);
+	mlx_delete_texture(data->west_tex);
+	mlx_delete_texture(data->east_tex);
+	free(data->ceiling);
+	free(data->floor);
+	free(data);
+}
 
 int	error_msg(char *str)
 {
@@ -37,36 +61,9 @@ int	input_check(int argc, char *argv[])
 	return (0);
 }
 
-void	save_map(t_data *data)
-{
-	(void)data;
-}
-
-int	save_input(t_data *data)
-{
-	int		fd;
-
-	fd = open(data->file, O_RDONLY);
-	if (fd <= 0)
-		return (0);
-	save_map(data);
-	data->mlx_ptr = mlx_init(2000, 1000, "Test", true);
-	if (!data->mlx_ptr)
-		return (0);
-	return (1);
-}
-
-// void	start_window(t_data *data)
+// void leak()
 // {
-// 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
-// 	if (!data->mlx_ptr)
-// 		exit(1);
-// 	data->north_img = mlx_texture_to_image(data->mlx_ptr, data->north_tex);
-// 	data->img = mlx_new_image(data->mlx_ptr, 2000, 2000);
-// 	if (!data->img)
-// 		return ;
-// 	mlx_loop(data->mlx_ptr);
-// 	mlx_terminate(data->mlx_ptr);
+// 	system("leaks cub3d");
 // }
 
 int	main(int argc, char **argv)
@@ -84,9 +81,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (extract_cub_data(argv[1], data))
 		return (1);
-	// start_window(data);
 	raycast_exe(data);
-	free(data->cub_cont);
+	free_datas(data);
 	return (0);
 }
 
