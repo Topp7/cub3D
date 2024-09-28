@@ -6,30 +6,27 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 13:58:16 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/28 20:03:02 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-float	calc_line_length(t_data *data)
+float	calc_line_length(t_data *data, float degree_change)
 {
 	float	line_h;
 	float	dist;
-	float	offset;
 
 	if (data->vr_pos->rlen > data->hr_pos->rlen)
 		dist = data->hr_pos->rlen;
 	else
 		dist = data->vr_pos->rlen;
-	offset = (data->p_pos->pa - data->vr_pos->ra);
-	offset = adjust_angle(offset);
-	dist = dist * cos(offset);
+	dist = dist * cos(degree_change);
 	line_h = (TILE * HEIGHT) / dist;
 	return (line_h);
 }
 
-void	draw_wall_line(t_data *data, int j)
+void	draw_wall_line(t_data *data, int j, float degree_change)
 {
 	float	line;
 	int		tex_y;
@@ -37,8 +34,8 @@ void	draw_wall_line(t_data *data, int j)
 	float	offset;
 	int		i;
 
+	line = calc_line_length(data, degree_change);
 	tex_y = get_tex_y(data);
-	line = calc_line_length(data);
 	x_step = (TILE / line);
 	offset = 0;
 	if (line > HEIGHT)
@@ -50,7 +47,8 @@ void	draw_wall_line(t_data *data, int j)
 	while (i < line)
 	{
 		mlx_put_pixel(data->w_img, j, (HEIGHT / 2) - (line / 2) + i,
-			get_tex_color(find_texture(data), (int)(x_step * i + offset), tex_y));
+			get_tex_color(find_texture(data), floor((x_step * i + offset)),
+				tex_y));
 		i++;
 	}
 }
@@ -75,78 +73,21 @@ void	draw_3d(t_data *data)
 	data->w_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->w_img)
 		return ;
-	while (j <= 383)
+	while (j < 384)
 	{
 		if (j != 0)
-			degree_change = (sixty_degree / 720) * j;
+			degree_change = (sixty_degree / WIDTH) * j;
 		else
 			degree_change = 0;
 		data->hr_pos->ra = data->p_pos->pa + degree_change;
 		data->vr_pos->ra = data->p_pos->pa + degree_change;
 		data->hr_pos->ra = adjust_angle(data->hr_pos->ra);
 		data->vr_pos->ra = adjust_angle(data->vr_pos->ra);
-		update_rays(data);
-		draw_wall_line(data, j + 384);
+		horizontal_rays(data);
+		vertical_rays(data);
+		draw_wall_line(data, j + 384, degree_change);
 		j++;
 	}
-}
-
-void	control_keyhook(void *param)
-{
-	t_data	*data;
-
-	data = param;
-	mlx_delete_image(data->mlx_ptr, data->w_img);
-	move_player(data);
-	turn_player(data);
-	draw_3d(data);
-	draw_map(data);
-	mlx_image_to_window(data->mlx_ptr, data->w_img, 0, 0);
-	printf("px: %f\npy: %f\n", data->p_pos->px, data->p_pos->py);
-}
-
-void	update_rays(t_data *data)
-{
-	horizontal_rays(data);
-	vertical_rays(data);
-}
-
-void	release(mlx_key_data_t keydata, t_data *data)
-{
-	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_RELEASE))
-		data->left_right = 0;
-	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_RELEASE))
-		data->left_right = 0;
-	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_RELEASE))
-		data->up_down = 0;
-	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_RELEASE))
-		data->up_down = 0;
-	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		data->rotate = 0;
-	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		data->rotate = 0;
-}
-
-void	keyhandle(mlx_key_data_t keydata, void *param)
-{
-	t_data	*data;
-
-	data = param;
-	if (keydata.key == MLX_KEY_ESCAPE)
-		mlx_close_window(data->mlx_ptr);
-	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
-		data->left_right = -1;
-	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))
-		data->left_right = 1;
-	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS))
-		data->up_down = -1;
-	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		data->up_down = 1;
-	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		data->rotate = -1;
-	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		data->rotate = 1;
-	release(keydata, data);
 }
 
 void	raycast_exe(t_data *data)

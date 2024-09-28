@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:38:56 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 12:57:47 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/27 18:33:04 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ int	get_tex_y(t_data *data)
 	int	tex_y;
 
 	if (data->hr_pos->rlen < data->vr_pos->rlen)
-		tex_y = data->hr_pos->ry;
+		tex_y = floor(data->hr_pos->ry);
 	else
-		tex_y = data->vr_pos->rx;
+		tex_y = floor(data->vr_pos->rx);
 	tex_y = (tex_y) % TILE;
 	return (tex_y);
 }
 
 mlx_texture_t	*find_texture(t_data *data)
 {
-	if (data->hr_pos->rlen <= data->vr_pos->rlen)
+	if (data->hr_pos->rlen < data->vr_pos->rlen)
 	{
 		if (data->hr_pos->ra > PI)
 			return (data->north_tex);
@@ -54,6 +54,8 @@ unsigned int	get_tex_color(mlx_texture_t	*texture, int x, int y)
 {
 	int				i;
 
+	if (x < 0 || x >= TILE)
+		return (0);
 	i = (x * TILE + y) * 4;
 	return (get_rgba(texture->pixels[i], texture->pixels[i + 1],
 			texture->pixels[i + 2], texture->pixels[i + 3]));

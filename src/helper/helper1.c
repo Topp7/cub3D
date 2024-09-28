@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:23:55 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/10 12:44:19 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/26 16:27:25 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ void	print2d_array(char **array)
 void	print_values(t_data *data)
 {
 	printf("\n");
-	printf("%s\n", data->north);
-	printf("%s\n", data->south);
-	printf("%s\n", data->west);
-	printf("%s\n", data->east);
 	printf("\n");
 	printf("Ceiling color: %d\n", data->c_rgb);
 	printf("Floor color: %d\n", data->f_rgb);
@@ -85,8 +81,6 @@ void	init_temp_struct(t_temp *temp)
 		temp->flag[temp->count++] = 0;
 	temp->count = 0;
 	temp->fd = 0;
-	temp->line = NULL;
-	temp->str = NULL;
 }
 
 // Helper function to check if the map is surrounded by walls

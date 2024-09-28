@@ -6,7 +6,7 @@
 #    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/19 18:00:51 by stopp            ###   ########.fr        #
+#    Updated: 2024/09/28 19:40:49 by stopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ BLUE := \033[0;34m
 NC := \033[0m
 
 # Flags
-CFLAGS  := -Wall -Werror -Wextra -g3 -I.
+CFLAGS  := -Wall -Werror -Wextra -I.
 
 LIBS := ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 

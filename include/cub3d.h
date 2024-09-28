@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 12:58:08 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/28 20:03:24 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,16 @@ typedef struct s_data
 	char			**map;
 	char			*north;
 	mlx_texture_t	*north_tex;
+	mlx_image_t		*north_img;
 	char			*south;
 	mlx_texture_t	*south_tex;
+	mlx_image_t		*south_img;
 	char			*west;
 	mlx_texture_t	*west_tex;
+	mlx_image_t		*west_img;
 	char			*east;
 	mlx_texture_t	*east_tex;
+	mlx_image_t		*east_img;
 	char			*ceiling;
 	unsigned int	c_rgb;
 	char			*floor;
@@ -102,6 +106,7 @@ typedef struct s_data
 	t_pos			*p_pos;
 	t_ray			*hr_pos;
 	t_ray			*vr_pos;
+	mlx_t			*mlx_ptr2;
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*m_img;
 	mlx_image_t		*w_img;
@@ -200,26 +205,28 @@ int				parse_cub_file(char *cub_file, t_data *data);
 
 //	src/raycasting/raycasting.c
 void			raycast_exe(t_data *data);
-void			update_rays(t_data *data);
+void			draw_3d(t_data *data);
 
-//	src/raycasting/raycasting.c
+//	src/raycasting/movement.c
 void			move_player(t_data *data);
 void			turn_player(t_data *data);
 float			adjust_angle(float angle);
 
 //	src/raycasting/test_functions.c
 void			add_testdata(t_data *data);
+void			keyhandle(mlx_key_data_t keydata, void *param);
+void			control_keyhook(void *param);
 
 //	src/raycasting/ray_calcs.c
 void			horizontal_rays(t_data *data);
 int				wall_hit(float mx, float my, t_data *data);
 void			vertical_rays(t_data *data);
 
-//	src/raycasting/ray_calcs.c
+//	src/raycasting/draw_minimap.c
 int				draw_map(t_data *data);
 void			draw_fnc(t_data *data);
 
-//	src/raycasting/ray_calcs.c
+//	src/raycasting/textures.c
 unsigned int	get_tex_color(mlx_texture_t	*texture, int x, int y);
 int				get_tex_y(t_data *data);
 mlx_texture_t	*find_texture(t_data *data);

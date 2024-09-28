@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:30:37 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/24 19:22:24 by stopp            ###   ########.fr       */
+/*   Updated: 2024/09/27 18:32:40 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	wall_hit(float mx, float my, t_data *data)
 	ymap = floor(my / TILE);
 	if (xmap < 0 || ymap < 0)
 		return (0);
-	if (xmap > data->map_x || ymap > (int)ft_strlen(data->map[data->map_x]))
+	if (xmap > data->map_x || ymap > (int)ft_strlen(data->map[xmap]))
 		return (0);
 	if (data->map[xmap][ymap] == '1')
 		return (0);
@@ -99,17 +99,17 @@ void	horizontal_rays(t_data *data)
 	atan = -1 / tan(data->hr_pos->ra);
 	if (data->hr_pos->ra > PI)
 	{
-		data->hr_pos->rx = floor(data->p_pos->px / TILE) * TILE;
+		data->hr_pos->rx = floor(data->p_pos->px / TILE) * TILE ;
 		data->hr_pos->ry = ((data->p_pos->px - data->hr_pos->rx) * atan)
-			+ data->p_pos->py;
+			+ data->p_pos->py ;
 		data->hr_pos->xo = -TILE;
 		data->hr_pos->yo = (-data->hr_pos->xo * atan);
 	}
 	else if (data->hr_pos->ra < PI)
 	{
-		data->hr_pos->rx = floor(data->p_pos->px / TILE) * TILE + TILE;
+		data->hr_pos->rx = floor(data->p_pos->px / TILE) * TILE + TILE ;
 		data->hr_pos->ry = ((data->p_pos->px - data->hr_pos->rx) * atan)
-			+ data->p_pos->py;
+			+ data->p_pos->py ;
 		data->hr_pos->xo = TILE;
 		data->hr_pos->yo = (-data->hr_pos->xo * atan);
 	}
