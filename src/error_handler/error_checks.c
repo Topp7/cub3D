@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:55:01 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/26 16:41:19 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 10:30:56 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	error_checks(t_data *data)
 	if (check_map_characters(*data))
 		return (error_msg("There is a wrong character in the map!"));
 	if (check_map_start_pos(*data))
-		return (error_msg("Missing or doubled starting position!"));
+		return (error_msg("Missing or multiple starting position/s!"));
 	if (check_paths(data))
 		return (error_msg("One of the Paths is not valid!"));
 	return (0);

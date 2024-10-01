@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/10/01 09:21:21 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 10:18:55 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ int				ft_strpbrk(const char *str, const char *charset);
 void			skip_empty_lines(char **cub_cont, int *i, int *j);
 void			skip_spaces(char **cub_cont, int *i, int *j);
 int				is_empty_line(char *line);
+void			init_textures(t_data *data);
 
 /* ---------------------------  INITIALIZATION  ---------------------------- */
 

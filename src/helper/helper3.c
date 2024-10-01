@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:41:25 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/26 13:37:39 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 10:18:34 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ int	is_empty_line(char *line)
 		i++;
 	}
 	return (1);
+}
+
+void	init_textures(t_data *data)
+{
+	data->north_tex = NULL;
+	data->south_tex = NULL;
+	data->west_tex = NULL;
+	data->east_tex = NULL;
 }
