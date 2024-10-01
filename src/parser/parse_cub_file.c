@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:35:42 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/16 16:32:49 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 11:31:01 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_cub_file(char *cub_file, t_data *data)
 	close(fd);
 	fd = open(cub_file, O_RDONLY);
 	if (fd == -1)
-		return (error_msg("Parsing failed"));
+		return (free(data->cub_cont), error_msg("Parsing failed"));
 	data->cub_cont[i] = get_next_line(fd);
 	while (data->cub_cont[i] != NULL)
 	{

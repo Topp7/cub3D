@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/10/01 10:18:55 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 11:27:19 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int				check_nonsense_3(t_data data);
 int				check_paths(t_data *data);
 
 //	src/error_handling/check_rgb.c
+void			free_2d_array(char **arr);
 int				check_rgb(t_data data);
 
 //	src/error_handling/error_checks.c

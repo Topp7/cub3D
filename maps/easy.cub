@@ -1,7 +1,7 @@
 NO ./textures/no_texture.png
 SO ./textures/so_texture.png
 WE ./textures/we_texture.png
-EA ./textures/ea_texture.txt
+EA ./textures/ea_texture.png
 
 C 0,100,200
 
@@ -9,7 +9,7 @@ F 255, 120, 203
 
 
 111111111111
-111100000001
-100001111101
-1N0001110111
+111100000011
+100N00111111
+100011101111
 111111111111

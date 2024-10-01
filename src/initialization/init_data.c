@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:26:04 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/03 15:37:12 by stopp            ###   ########.fr       */
+/*   Updated: 2024/10/01 11:40:19 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	init_data(t_data **data)
 	{
 		printf("Error\n");
 		printf("Malloc failed\n");
+		free(*data);
 		return (1);
 	}
 	return (0);

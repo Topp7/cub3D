@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 16:52:40 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 11:50:30 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,6 @@ int	input_check(int argc, char *argv[])
 	return (0);
 }
 
-// void leak()
-// {
-// 	system("leaks cub3d");
-// }
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -76,9 +71,9 @@ int	main(int argc, char **argv)
 	if (init_data(&data))
 		return (1);
 	if (parse_cub_file(argv[1], data))
-		return (1);
+		return (free(data->p_pos), free(data), 1);
 	if (error_checks(data))
-		return (1);
+		return (free(data->p_pos), free_2d_array(data->cub_cont), free(data), 1);
 	if (extract_cub_data(argv[1], data))
 		return (1);
 	raycast_exe(data);
@@ -86,5 +81,8 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-// -fsanitize=address vor der Eval entfernen aus der Makefile
-// cub3d.dSYM vor der Eval entfernen
+
+// void leak()
+// {
+// 	system("leaks cub3d");
+// }
