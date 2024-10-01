@@ -6,7 +6,7 @@
 #    By: chorst <chorst@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/25 11:06:07 by chorst           ###   ########.fr        #
+#    Updated: 2024/09/26 16:54:13 by chorst           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ BLUE := \033[0;34m
 NC := \033[0m
 
 # Flags
-CFLAGS  := -Wall -Werror -Wextra -fsanitize=address -g3 -I.
+CFLAGS  := -Wall -Werror -Wextra -I.
 
 LIBS := ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 
