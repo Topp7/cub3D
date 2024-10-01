@@ -1,7 +1,7 @@
 NO ./textures/no_texture.png
 SO ./textures/so_texture.png
 WE ./textures/we_texture.png
-EA ./textures/ea_texture.txt
+EA ./textures/ea_texture.png
 
 C 0,100,200
 
