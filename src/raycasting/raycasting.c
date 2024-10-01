@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:41 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/28 20:12:23 by stopp            ###   ########.fr       */
+/*   Updated: 2024/10/01 10:19:38 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	draw_3d(t_data *data)
 
 void	raycast_exe(t_data *data)
 {
-	add_testdata(data);
+	add_data(data);
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	if (!data->mlx_ptr)
 		return ;

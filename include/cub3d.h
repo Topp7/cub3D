@@ -6,7 +6,7 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/28 20:11:53 by stopp            ###   ########.fr       */
+/*   Updated: 2024/10/01 10:19:28 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ void			turn_player(t_data *data);
 float			adjust_angle(float angle);
 
 //	src/raycasting/test_functions.c
-void			add_testdata(t_data *data);
+void			add_data(t_data *data);
 void			keyhandle(mlx_key_data_t keydata, void *param);
 void			control_keyhook(void *param);
 

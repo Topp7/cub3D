@@ -6,13 +6,13 @@
 /*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:05:20 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/28 19:59:13 by stopp            ###   ########.fr       */
+/*   Updated: 2024/10/01 10:18:42 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	add_testdata(t_data *data)
+void	add_data(t_data *data)
 {
 	data->hr_pos = malloc(sizeof(t_ray));
 	if (!data->hr_pos)

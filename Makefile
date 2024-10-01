@@ -6,12 +6,12 @@
 #    By: stopp <stopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:09:25 by stopp             #+#    #+#              #
-#    Updated: 2024/09/28 20:11:47 by stopp            ###   ########.fr        #
+#    Updated: 2024/09/30 16:45:06 by stopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project name
-NAME := cub3d
+NAME := cub3D
 
 # Define ANSI color codes
 GREEN := \033[0;32m
