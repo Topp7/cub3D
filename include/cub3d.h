@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:10:05 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 16:47:28 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 09:21:21 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,26 +193,28 @@ int				parse_cub_file(char *cub_file, t_data *data);
 
 //	src/raycasting/raycasting.c
 void			raycast_exe(t_data *data);
-void			update_rays(t_data *data);
+void			draw_3d(t_data *data);
 
-//	src/raycasting/raycasting.c
+//	src/raycasting/movement.c
 void			move_player(t_data *data);
 void			turn_player(t_data *data);
 float			adjust_angle(float angle);
 
 //	src/raycasting/test_functions.c
 void			add_testdata(t_data *data);
+void			keyhandle(mlx_key_data_t keydata, void *param);
+void			control_keyhook(void *param);
 
 //	src/raycasting/ray_calcs.c
 void			horizontal_rays(t_data *data);
 int				wall_hit(float mx, float my, t_data *data);
 void			vertical_rays(t_data *data);
 
-//	src/raycasting/ray_calcs.c
+//	src/raycasting/draw_minimap.c
 int				draw_map(t_data *data);
 void			draw_fnc(t_data *data);
 
-//	src/raycasting/ray_calcs.c
+//	src/raycasting/textures.c
 unsigned int	get_tex_color(mlx_texture_t	*texture, int x, int y);
 int				get_tex_y(t_data *data);
 mlx_texture_t	*find_texture(t_data *data);

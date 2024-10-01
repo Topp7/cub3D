@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stopp <stopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:38:56 by stopp             #+#    #+#             */
-/*   Updated: 2024/09/26 14:51:54 by chorst           ###   ########.fr       */
+/*   Updated: 2024/09/28 20:11:29 by stopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ int	get_tex_y(t_data *data)
 	int	tex_y;
 
 	if (data->hr_pos->rlen < data->vr_pos->rlen)
-		tex_y = data->hr_pos->ry;
+		tex_y = floor(data->hr_pos->ry);
 	else
-		tex_y = data->vr_pos->rx;
+		tex_y = floor(data->vr_pos->rx);
 	tex_y = (tex_y) % TILE;
 	return (tex_y);
 }
 
 mlx_texture_t	*find_texture(t_data *data)
 {
-	if (data->hr_pos->rlen <= data->vr_pos->rlen)
+	if (data->hr_pos->rlen < data->vr_pos->rlen)
 	{
 		if (data->hr_pos->ra > PI)
 			return (data->north_tex);
@@ -54,6 +54,8 @@ unsigned int	get_tex_color(mlx_texture_t	*texture, int x, int y)
 {
 	int				i;
 
+	if (x < 0 || x >= TILE)
+		return (0);
 	i = (x * TILE + y) * 4;
 	if (i < 0 || i >= (TILE * TILE + TILE) * 4 - 3)
 		return (0);
