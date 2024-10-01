@@ -6,11 +6,23 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:30:20 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/26 16:45:32 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 10:22:54 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	free_textures(t_data *data)
+{
+	if (data->north_tex)
+		mlx_delete_texture(data->north_tex);
+	if (data->south_tex)
+		mlx_delete_texture(data->south_tex);
+	if (data->west_tex)
+		mlx_delete_texture(data->west_tex);
+	if (data->east_tex)
+		mlx_delete_texture(data->east_tex);
+}
 
 int	direction(char *str)
 {
@@ -25,29 +37,33 @@ int	direction(char *str)
 	return (0);
 }
 
-void	path_validation(t_data *data)
-{
-	if (!data->north_tex)
-		return ;
-	else if (!data->south_tex)
-		return ;
-	else if (!data->west_tex)
-		return ;
-	else if (!data->east_tex)
-		return ;
-}
-
-void	load_path_into_struct(t_data *data, char *path)
+int	load_path_into_struct(t_data *data, char *path)
 {
 	if (direction(path) == 1)
+	{
 		data->north_tex = mlx_load_png(path + 2);
+		if (!data->north_tex)
+			return (1);
+	}
 	else if (direction(path) == 2)
+	{
 		data->south_tex = mlx_load_png(path + 2);
+		if (!data->south_tex)
+			return (1);
+	}
 	else if (direction(path) == 3)
+	{
 		data->west_tex = mlx_load_png(path + 2);
+		if (!data->west_tex)
+			return (1);
+	}
 	else if (direction(path) == 4)
+	{
 		data->east_tex = mlx_load_png(path + 2);
-	path_validation(data);
+		if (!data->east_tex)
+			return (1);
+	}
+	return (0);
 }
 
 int	check_paths(t_data *data)
@@ -57,6 +73,7 @@ int	check_paths(t_data *data)
 	char	*path;
 
 	i = 0;
+	init_textures(data);
 	while (data->cub_cont[i])
 	{
 		j = 0;
@@ -65,7 +82,11 @@ int	check_paths(t_data *data)
 		if (regognize_direction(data->cub_cont[i] + j) == 1)
 		{
 			path = remove_chars(data->cub_cont[i] + j, " \n");
-			load_path_into_struct(data, path);
+			if (load_path_into_struct(data, path))
+			{
+				free_textures(data);
+				return (free(path), 1);
+			}
 			free(path);
 		}
 		i++;

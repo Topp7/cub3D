@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 16:04:16 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/10 11:30:54 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 10:25:30 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	check_map_surrounded_by_walls(t_data data)
 		j = 0;
 		while (data.cub_cont[i][j])
 		{
-			if (data.cub_cont[i][j] == '0')
+			if (data.cub_cont[i][j] == '0' || data.cub_cont[i][j] == 'N'
+				|| data.cub_cont[i][j] == 'E' || data.cub_cont[i][j] == 'S'
+				|| data.cub_cont[i][j] == 'W')
 			{
 				if (is_surrounded_by_walls(data.cub_cont, i, j) != 0)
 					return (1);

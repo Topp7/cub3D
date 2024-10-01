@@ -6,11 +6,21 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:19:59 by chorst            #+#    #+#             */
-/*   Updated: 2024/09/26 16:36:27 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 11:24:54 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	free_2d_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
 
 void	free_rgb(char **rgb)
 {
@@ -33,7 +43,8 @@ int	check_rgb_helper(char *str)
 	j = 0;
 	temp = remove_chars(str, " \n");
 	rgb = ft_split(temp, ',');
-	free(temp);
+	if (rgb == NULL)
+		return (free(temp), 1);
 	i = 0;
 	while (rgb[i])
 	{
@@ -41,13 +52,12 @@ int	check_rgb_helper(char *str)
 		while (rgb[i][j] >= '0' && rgb[i][j] <= '9')
 			j++;
 		if (rgb[i][j] != '\0')
-			return (free(rgb), 1);
+			return (free(temp), free_2d_array(rgb), 1);
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
-			return (free(rgb), 2);
+			return (free(temp), free_2d_array(rgb), 2);
 		i++;
 	}
-	free_rgb(rgb);
-	return (0);
+	return (free(temp), free_2d_array(rgb), 0);
 }
 
 int	check_rgb(t_data data)
