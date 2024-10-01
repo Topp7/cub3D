@@ -6,7 +6,7 @@
 /*   By: chorst <chorst@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:12:29 by stopp             #+#    #+#             */
-/*   Updated: 2024/10/01 11:50:30 by chorst           ###   ########.fr       */
+/*   Updated: 2024/10/01 11:54:05 by chorst           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ int	main(int argc, char **argv)
 	if (parse_cub_file(argv[1], data))
 		return (free(data->p_pos), free(data), 1);
 	if (error_checks(data))
-		return (free(data->p_pos), free_2d_array(data->cub_cont), free(data), 1);
+		return (free(data->p_pos), free_2d_array(data->cub_cont), free(data),
+			1);
 	if (extract_cub_data(argv[1], data))
 		return (1);
 	raycast_exe(data);
 	free_datas(data);
 	return (0);
 }
-
 
 // void leak()
 // {
